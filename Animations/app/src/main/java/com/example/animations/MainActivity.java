@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean bartIsShowing = true;
+//    boolean bartIsShowing = true;
 
     public void fade(View view) {
 
@@ -20,25 +20,34 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView homerImageView = (ImageView) findViewById(R.id.homerImageView);
 
-        if (bartIsShowing) {
-            bartIsShowing = false;
+        // 1000dp down in 2s
+        bartImageView.animate().alpha(1).translationXBy(1000).rotation(1800).setDuration(1000);
 
-            bartImageView.animate().alpha(0).setDuration(2000);
-
-            homerImageView.animate().alpha(1).setDuration(2000);
-        } else {
-            bartIsShowing = true;
-
-            bartImageView.animate().alpha(1).setDuration(2000);
-
-            homerImageView.animate().alpha(0).setDuration(2000);
-        }
+//        if (bartIsShowing) {
+//            bartIsShowing = false;
+//
+//            bartImageView.animate().alpha(0).setDuration(2000);
+//
+//            homerImageView.animate().alpha(1).setDuration(2000);
+//        } else {
+//            bartIsShowing = true;
+//
+//            bartImageView.animate().alpha(1).setDuration(2000);
+//
+//            homerImageView.animate().alpha(0).setDuration(2000);
+//        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageView bartImageView = (ImageView) findViewById(R.id.bartImageView);
+
+        bartImageView.setX(-1000);
+
+        bartImageView.animate().translationXBy(1000).rotation(3600).alpha(1).setDuration(2000);
 
     }
 }
