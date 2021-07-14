@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:onClick="playAgain"
         android:text="Play Again"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/winnerTextView" />
