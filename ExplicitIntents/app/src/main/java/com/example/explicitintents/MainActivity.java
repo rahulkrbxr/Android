@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
                 int num2 = Integer.parseInt(secondNum.getText().toString());
 
                 Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                intent.putExtra("SUM", num1 + " " + num2 + " = " + (num1+num2));
+//                intent.putExtra("SUM", num1 + " + " + num2 + " = " + (num1+num2));
+                intent.putExtra("SUM",num1+" + "+num2+" = "+(num1+num2));
                 startActivity(intent);
             }
         });
