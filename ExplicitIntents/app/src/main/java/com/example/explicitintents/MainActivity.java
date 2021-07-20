@@ -17,19 +17,62 @@ public class MainActivity extends AppCompatActivity {
 
         EditText firstNum = (EditText) findViewById(R.id.firstTextNumber);
         EditText secondNum = (EditText) findViewById(R.id.secondTextNumber);
-        Button btnAdd = (Button) findViewById(R.id.addButton);
+
+        Button btnAdd = (Button) findViewById(R.id.addButton3);
+        Button btnSub = (Button) findViewById(R.id.subButton);
+        Button btnProduct = (Button) findViewById(R.id.productButton);
+
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int num1 = Integer.parseInt(firstNum.getText().toString());
-                int num2 = Integer.parseInt(secondNum.getText().toString());
+                double num1 = Double.parseDouble(firstNum.getText().toString());
+                double num2 = Double.parseDouble(secondNum.getText().toString());
+                double ans = num1 + num2;
+                String sum = Double.toString(ans);
 
-                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+//                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
 //                intent.putExtra("SUM", num1 + " + " + num2 + " = " + (num1+num2));
-                intent.putExtra("SUM",num1+" + "+num2+" = "+(num1+num2));
+//                intent.putExtra("SUM",num1+" + "+num2+" = "+(num1+num2));
+
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("Sum", sum);
+
                 startActivity(intent);
             }
         });
+
+
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double num1 = Double.parseDouble(firstNum.getText().toString());
+                double num2 = Double.parseDouble(secondNum.getText().toString());
+                double ans = num1 - num2;
+                String sub = Double.toString(ans);
+
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("Sub", sub);
+
+                startActivity(intent);
+            }
+        });
+
+
+        btnProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double num1 = Double.parseDouble(firstNum.getText().toString());
+                double num2 = Double.parseDouble(secondNum.getText().toString());
+                double ans = num1 * num2;
+                String product = Double.toString(ans);
+
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("Product", product);
+
+                startActivity(intent);
+            }
+        });
+
     }
 }
