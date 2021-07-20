@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    String resultedValue = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 double num2 = Double.parseDouble(secondNum.getText().toString());
                 double ans = num1 + num2;
                 String sum = Double.toString(ans);
+                resultedValue=sum;
 
 //                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
 //                intent.putExtra("SUM", num1 + " + " + num2 + " = " + (num1+num2));
 //                intent.putExtra("SUM",num1+" + "+num2+" = "+(num1+num2));
 
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                intent.putExtra("Sum", sum);
+                intent.putExtra("value", resultedValue);
 
                 startActivity(intent);
             }
@@ -50,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
                 double num2 = Double.parseDouble(secondNum.getText().toString());
                 double ans = num1 - num2;
                 String sub = Double.toString(ans);
+                resultedValue=sub;
 
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                intent.putExtra("Sub", sub);
+                intent.putExtra("value", resultedValue);
 
                 startActivity(intent);
             }
@@ -66,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
                 double num2 = Double.parseDouble(secondNum.getText().toString());
                 double ans = num1 * num2;
                 String product = Double.toString(ans);
-
+                resultedValue=product;
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                intent.putExtra("Product", product);
+                intent.putExtra("value", resultedValue);
 
                 startActivity(intent);
             }

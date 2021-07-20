@@ -18,8 +18,11 @@ public class ResultActivity extends AppCompatActivity {
 //        String addition = (String) intent.getSerializableExtra("SUM");
 
         Bundle extras = getIntent().getExtras();
-        String key = "Sum";
-        String ans = extras.getString(key);
+//        String key = "Sum";
+        String ans = extras.getString("value");
+
+        TextView text=(TextView)findViewById(R.id.resultTextView) ;
+        text.setText(ans);
         
 //        result.setText(addition);
 

@@ -16,8 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Creating the LayoutInflater instance
         LayoutInflater li = getLayoutInflater();
 
+        //Getting the View object as defined in the customtoast.xml file
         View layout = li.inflate(R.layout.customtoast, (ViewGroup)findViewById(R.id.custom_toast_layout));
 
 
