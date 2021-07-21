@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">AlertDialog</string>
-    <string name="dialog_message">Welcome</string>
-    <string name="dialog_title">Login Alert</string>
+    <string name="app_name" translatable="false">Patna Fast Food Service</string>
+    <string name="dialog_message">Do you want to close this app</string>
+    <string name="dialog_title">Alert Dialog Example</string>
+
+    <string-array name="europeCountries">
+        <item>Denmark</item>
+        <item>Finland</item>
+        <item>England</item>
+        <item>Germany</item>
+        <item>Poland</item>
+    </string-array>
 </resources>

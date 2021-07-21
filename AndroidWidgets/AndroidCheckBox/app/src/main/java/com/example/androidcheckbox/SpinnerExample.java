@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 public class SpinnerExample extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
-    String[] country = {"India", "Bangladesh", "Srilanka", "Bhutan", "Nepal", "Other"};
-    Spinner spin;
+    String[] country = {"Select a country", "India", "Bangladesh", "Srilanka", "Bhutan", "Nepal", "Other"};
+    Spinner spinner;
 
 
     @Override
@@ -22,28 +22,28 @@ public class SpinnerExample extends AppCompatActivity implements
         setContentView(R.layout.activity_spinner_example);
 
         //Getting the instance of spinner and applying clickListener on it
-        spin = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinnerCountry);
 //        spin.setOnItemClickListener(this);
 
         //Creating the array adapter having country list
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, country);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, country);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         //Setting the ArrayAdapter data on spinner
-        spin.setAdapter(adapter);
-        spin.setOnItemSelectedListener(this);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
     }
 
 @Override
     // action when an item or nothing is selected
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        switch (arg0.getId())
+        switch (parent.getId())
         {
-            case R.id.spinner:
+            case R.id.spinnerCountry:
                 //if(position>0){
-                Toast.makeText(getApplicationContext(), country[position], Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), country[position], Toast.LENGTH_SHORT).show();
 
                 Log.i("Country", country[position]);
                 //}

@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCheckBox">
-        <activity android:name=".AlertDialogExample"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SpinnerExample">
+        <activity android:name=".SpinnerExample"></activity>
+        <activity android:name=".AlertDialogExample" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".WidgetsExample1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -28,25 +28,26 @@ public class AlertDialogExample extends AppCompatActivity {
             public void onClick(View v) {
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
-                builder.setMessage("Do you want to close the application ? ")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                builder.setMessage("Do you want to close the application ? ");
+//                        .setCancelable(false);
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                Toast.makeText(getApplicationContext(), "You choose yes option from alertbox", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "You choose YES", Toast.LENGTH_SHORT).show();
                             }
                         })
+
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
-                                Toast.makeText(getApplicationContext(), "You choose no option from alertbox", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "You choose NO", Toast.LENGTH_SHORT).show();
                             }
                         });
 
                 AlertDialog alertDialog = builder.create();
-                alertDialog.setTitle("Dialog box example");
+//                alertDialog.setTitle("Dialog box example");
                 alertDialog.show();
 
             }
