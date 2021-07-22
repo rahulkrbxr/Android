@@ -1,31 +1,26 @@
-<<<<<<< Original<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.androidcheckbox">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.androidcheckbox">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AndroidCheckBox">
+        <activity android:name=".RelativeLayout"></activity>
+        <activity android:name=".WidgetsExample2" />
+        <activity android:name=".SpinnerExample" />
+        <activity android:name=".AlertDialogExample" />
+        <activity android:name=".WidgetsExample1" />
+        <activity android:name=".AsyncExample">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.AndroidCheckBox">
-    <activity android:name=".RelativeLayout"></activity>
-    <activity android:name=".WidgetsExample2" />
-    <activity android:name=".SpinnerExample" />
-    <activity android:name=".AlertDialogExample" />
-    <activity android:name=".WidgetsExample1" />
-    <activity android:name=".RelativeLayout">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-</application>
-
-</manifest>=======
-
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<application>
-    <activity android:name="com.example.androidcheckbox.AsyncExample"></activity>
-</application>
-</manifest>>>>>>>> Added
+</manifest>
