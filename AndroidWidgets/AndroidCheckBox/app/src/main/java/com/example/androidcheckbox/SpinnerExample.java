@@ -23,7 +23,7 @@ public class SpinnerExample extends AppCompatActivity implements
 
         //Getting the instance of spinner and applying clickListener on it
         spinner = findViewById(R.id.spinnerCountry);
-//        spin.setOnItemClickListener(this);
+//        spinner.setOnItemClickListener(this);
 
         //Creating the array adapter having country list
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, country);
@@ -39,17 +39,18 @@ public class SpinnerExample extends AppCompatActivity implements
     // action when an item or nothing is selected
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        switch (parent.getId())
-        {
-            case R.id.spinnerCountry:
-                //if(position>0){
-                Toast.makeText(getApplicationContext(), country[position], Toast.LENGTH_SHORT).show();
+//        switch (parent.getId())
+//        {
+//            case R.id.spinnerCountry:
+//                //if(position>0){
+//                Toast.makeText(getApplicationContext(), country[position], Toast.LENGTH_SHORT).show();
+//
+//                Log.i("Country", country[position]);
+//                //}
+//                break;
+//        }
 
-                Log.i("Country", country[position]);
-                //}
-                break;
-        }
-
+        Toast.makeText(getApplicationContext(), country[position], Toast.LENGTH_SHORT).show();
 
     }
 @Override
