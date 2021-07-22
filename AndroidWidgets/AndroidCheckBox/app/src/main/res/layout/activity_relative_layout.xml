@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".RelativeLayout">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/a"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
+            android:text="Child View"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+<!--        android:layout_alignParentRight="false"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentBottom="false"/>-->
+
+        <TextView
+            android:layout_above="@id/a"
+            android:layout_centerInParent="true"
+            android:id="@+id/b"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="false"
+            android:background="@android:color/black"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:text="Child View"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
