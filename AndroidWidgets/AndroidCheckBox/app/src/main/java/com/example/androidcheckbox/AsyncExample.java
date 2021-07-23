@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -31,8 +33,11 @@ public class AsyncExample extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncTaskExample asyncTask=new AsyncTaskExample();
-                asyncTask.execute("https://www.tutorialspoint.com/images/tp-logo-diamond.png");
+//                AsyncTaskExample asyncTask=new AsyncTaskExample();
+//                asyncTask.execute("https://images.pexels.com/photos/271611/pexels-photo-271611.jpeg?cs=srgb&dl=pexels-pixabay-271611.jpg&fm=jpg");
+
+                Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView);
+
             }
         });
     }
@@ -50,7 +55,6 @@ public class AsyncExample extends AppCompatActivity {
         protected Bitmap doInBackground(String... strings) {
             try {
                 ImageUrl = new URL(strings[0]);
-//                URL url = new URL(strings[0]);
                 HttpURLConnection conn = (HttpURLConnection) ImageUrl.openConnection();
                 conn.setDoInput(true);
                 conn.connect();

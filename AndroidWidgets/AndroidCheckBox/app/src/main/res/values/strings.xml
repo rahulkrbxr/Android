@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Patna Fast Food Service</string>
+    <string name="app_name" translatable="false">AsyncExample</string>
     <string name="dialog_message">Do you want to close this app</string>
     <string name="dialog_title">Alert Dialog Example</string>
 
