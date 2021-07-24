@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".MathTable"></activity>
+        <activity android:name=".TimerDemo"></activity>
+        <activity android:name=".MathTable" />
         <activity android:name=".ListViewExample" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".TimerDemo">
+        <activity android:name=".SchoolTimer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
