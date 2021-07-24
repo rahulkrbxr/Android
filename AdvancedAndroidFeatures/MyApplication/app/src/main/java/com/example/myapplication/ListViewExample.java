@@ -40,6 +40,5 @@ public class ListViewExample extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), friends.get(position), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
