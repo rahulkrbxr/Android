@@ -2,10 +2,12 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -13,9 +15,30 @@ public class SchoolTimer extends AppCompatActivity {
 
     TextView schoolTimerCounterTextView;
     SeekBar schoolTimerSeekBar;
+    boolean counterIsActive = false;
+    Button schoolTimerGoButton;
+    CountDownTimer countDownTimer;
+
+    public void resetTimer() {
+        schoolTimerSeekBar.setProgress(30);
+        schoolTimerCounterTextView.setText("0:30");
+        schoolTimerSeekBar.setEnabled(true);
+        schoolTimerGoButton.setText("Go!");
+        counterIsActive = false;
+        countDownTimer.cancel();
+    }
 
     public void buttonClicked(View view) {
-        final CountDownTimer countDownTimer = new CountDownTimer(schoolTimerSeekBar.getProgress()*1000 + 100, 1000) {
+
+        if(counterIsActive) {
+            resetTimer();
+        } else {
+            counterIsActive = true;
+            schoolTimerSeekBar.setEnabled(false);
+            schoolTimerGoButton = findViewById(R.id.schoolTimerGoButton);
+            schoolTimerGoButton.setText("Stop!");
+
+            countDownTimer = new CountDownTimer(schoolTimerSeekBar.getProgress()*1000 + 100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTimer((int) (millisUntilFinished/1000));
@@ -23,9 +46,13 @@ public class SchoolTimer extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Log.i("Finished", "Timer done!");
+//                Log.i("Finished", "Timer done!");
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.air_horn);
+                mediaPlayer.start();
+                resetTimer();
             }
         }.start();
+        }
     }
 
     public void updateTimer(int secondsLeft) {
