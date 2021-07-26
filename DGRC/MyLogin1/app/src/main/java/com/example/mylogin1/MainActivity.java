@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     //    DataBaseHelper dataBaseHelper;
     EditText et_login,et_password;
-    Button btn_ligin;
+    Button btn_login;
     String username,password;
     private ProgressDialog dialog;
 //    String version = "0";
@@ -32,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         dialog = new ProgressDialog(MainActivity.this);
 
-        btn_ligin.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SetValue();
 
                 if (validateData()) {
-                    Toast.makeText(MainActivity.this, "Your data is valid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Your data is enterd", Toast.LENGTH_SHORT).show();
                     new LoginTask().execute(); //calling asynctask to execute
                 }
             }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     {
         et_login=findViewById(R.id.edit_text_username);
         et_password=findViewById(R.id.edit_text_pass);
-        btn_ligin = findViewById(R.id.button_login);
+        btn_login = findViewById(R.id.button_login);
     }
 
     private void SetValue()
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected UserLogin doInBackground(String... params) {
 
-
 //            if (!Utiilties.isOnline(LoginActivity.this))
 //            {
 //                return OfflineLogin(username,password);
@@ -123,27 +122,28 @@ public class MainActivity extends AppCompatActivity {
             long c = 0;
             if (result != null) {
                 if (result.getAuthenticated()) {
+
+                        Log.d("username",result.get_UserName());
                     if (result.get_Role().equalsIgnoreCase("JEADM")||result.get_Role().equalsIgnoreCase("AEADM")||result.get_Role().equalsIgnoreCase("EEADM")||result.get_Role().equalsIgnoreCase("SEADM")) {
                         dialog.dismiss();
                         String userid = result.get_UserID();
                         String userpss = result.get_Password();
                    /* String imei1=result.getImei();
                     String abc=imei;*/
-                        GlobalVariables.LoggedUser = result;
-                        GlobalVariables.LoggedUser.set_UserID(username);
-
-                        GlobalVariables.LoggedUser.set_Password(password);
-                        CommonPref.setUserDetails(getApplicationContext(), GlobalVariables.LoggedUser);
-
-                        c = dataBaseHelper.insertUserDetail(result, username, password);
-                        if (c > 0) {
-                            new Division_List().execute();
-
-                        } else {
-                            dialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Credentials not inserted", Toast.LENGTH_LONG).show();
-                        }
-
+//                        GlobalVariables.LoggedUser = result;
+//                        GlobalVariables.LoggedUser.set_UserID(username);
+//
+//                        GlobalVariables.LoggedUser.set_Password(password);
+//                        CommonPref.setUserDetails(getApplicationContext(), GlobalVariables.LoggedUser);
+//
+//                        c = dataBaseHelper.insertUserDetail(result, username, password);
+//                        if (c > 0) {
+//                            new Division_List().execute();
+//
+//                        } else {
+//                            dialog.dismiss();
+//                            Toast.makeText(getApplicationContext(), "Credentials not inserted", Toast.LENGTH_LONG).show();
+//                        }
 
                     } else {
                         dialog.dismiss();
