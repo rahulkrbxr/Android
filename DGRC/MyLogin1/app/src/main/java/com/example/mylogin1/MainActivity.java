@@ -3,20 +3,25 @@ package com.example.mylogin1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mylogin1.database.DataBaseHelper;
+import com.example.mylogin1.database.WebServiceHelper;
 
 //import in.nic.bih.oprmcmonitoring.activity.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    DataBaseHelper dataBaseHelper;
+    DataBaseHelper dataBaseHelper;
     EditText et_login,et_password;
     Button btn_login;
     String username,password;
@@ -38,11 +43,28 @@ public class MainActivity extends AppCompatActivity {
                 SetValue();
 
                 if (validateData()) {
-                    Toast.makeText(MainActivity.this, "Your data is enterd", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Your data is entered", Toast.LENGTH_SHORT).show();
                     new LoginTask().execute(); //calling asynctask to execute
                 }
             }
         });
+
+        // Get the app's shared preferences
+        SharedPreferences app_preferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Get the value for the run counter
+        int counter = app_preferences.getInt("counter", 0);
+
+        // Update the TextView
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText("This app has been started " + counter + " times.");
+
+        // Increment the counter
+        SharedPreferences.Editor editor = app_preferences.edit();
+        editor.putInt("counter", ++counter);
+        editor.commit(); // Very important
+
     }
 
     private void Initialization()
@@ -130,18 +152,18 @@ public class MainActivity extends AppCompatActivity {
                         String userpss = result.get_Password();
                    /* String imei1=result.getImei();
                     String abc=imei;*/
-//                        GlobalVariables.LoggedUser = result;
-//                        GlobalVariables.LoggedUser.set_UserID(username);
-//
-//                        GlobalVariables.LoggedUser.set_Password(password);
-//                        CommonPref.setUserDetails(getApplicationContext(), GlobalVariables.LoggedUser);
-//
-//                        c = dataBaseHelper.insertUserDetail(result, username, password);
+                        GlobalVariables.LoggedUser = result;
+                        GlobalVariables.LoggedUser.set_UserID(username);
+
+                        GlobalVariables.LoggedUser.set_Password(password);
+                        CommonPref.setUserDetails(getApplicationContext(), GlobalVariables.LoggedUser);
+
+                        c = dataBaseHelper.insertUserDetail(result, username, password);
 //                        if (c > 0) {
 //                            new Division_List().execute();
-//
+
 //                        } else {
-//                            dialog.dismiss();
+                        dialog.dismiss();
 //                            Toast.makeText(getApplicationContext(), "Credentials not inserted", Toast.LENGTH_LONG).show();
 //                        }
 

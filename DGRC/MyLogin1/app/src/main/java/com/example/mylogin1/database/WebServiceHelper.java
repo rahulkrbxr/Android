@@ -1,17 +1,11 @@
-package com.example.mylogin1;
+package com.example.mylogin1.database;
 
-import android.util.Base64;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.mylogin1.MainActivity;
+import com.example.mylogin1.UserLogin;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-
-import java.util.ArrayList;
 
 //import in.nic.bih.oprmcmonitoring.entity.ChangePassword;
 //import in.nic.bih.oprmcmonitoring.entity.CircleList;
