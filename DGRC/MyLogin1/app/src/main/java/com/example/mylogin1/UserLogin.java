@@ -29,6 +29,10 @@ public class UserLogin {
     private String _PackageId = "";
 //    private String _PackageNm = "";
 
+    public UserLogin(){
+
+    }
+
     public UserLogin(SoapObject obj) {
         this._isAuthenticated = Boolean.parseBoolean(obj.getProperty("isAuthenticated").toString());
         this._UserName = obj.getProperty("UserName").toString();
