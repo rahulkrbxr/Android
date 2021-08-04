@@ -160,6 +160,7 @@
         android:layout_marginTop="11dp"
         android:onClick="playAgain"
         android:text="Play again"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
