@@ -1,6 +1,7 @@
     package com.example.braintrainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView sumTextView;
     TextView timerTextView;
     Button playAgainButton;
+    ConstraintLayout gameLayout;
 
     public void playAgain(View view) {
         score = 0;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
 
-        new CountDownTimer(5100, 1000) {
+        new CountDownTimer(10100, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 resultTextView.setText("Done!");
                 playAgainButton.setVisibility(View.VISIBLE);
+                resultTextView.setText("");
             }
         }.start();
 
@@ -69,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void start(View view) {
+
         goButton.setVisibility(View.INVISIBLE);
+        playAgain(timerTextView);
+        gameLayout.setVisibility(View.VISIBLE);
     }
 
     public void newQuestion() {
@@ -118,8 +124,11 @@ public class MainActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         timerTextView = findViewById(R.id.timerTextView);
         playAgainButton = findViewById(R.id.playAgainButton);
+        gameLayout = findViewById(R.id.gameLayout);
+        goButton = findViewById(R.id.goButton);
 
-        playAgain(timerTextView);
+        goButton.setVisibility(View.VISIBLE);
+        gameLayout.setVisibility(View.INVISIBLE);
 
     }
 }
