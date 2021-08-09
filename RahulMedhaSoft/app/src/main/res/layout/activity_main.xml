@@ -43,7 +43,8 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:src="@drawable/icon_school"
                 app:civ_border_overlay="true"
@@ -55,9 +56,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/profile_image"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Details of user"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -67,9 +68,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/user_name"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Dise Coder"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -79,9 +80,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/user_dise"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Total Students (MID Day Meal)"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -91,17 +92,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/total_students_mid_day_meal"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Total Students"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:layout_marginBottom="5dp"
+                android:paddingTop="12dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -121,9 +121,9 @@
                         android:id="@+id/syn_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="2dp"
                         android:text="Fetch Current Record"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="#8d1010"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -144,9 +144,9 @@
                         android:id="@+id/sch_instructions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="2dp"
                         android:text="स्टूडेंट चेक लिस्ट आवश्यक सूचना"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="#a4ad58"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -167,6 +167,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,7 +177,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
 
-                        android:layout_height="200sp"
+                        android:layout_height="140sp"
                         android:layout_marginLeft="0sp"
                         android:layout_weight="1">
 
@@ -216,7 +217,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
-                        android:layout_height="200sp"
+                        android:layout_height="140sp"
                         android:layout_marginLeft="0sp"
                         android:layout_weight="1">
 
@@ -255,7 +256,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
 
-                        android:layout_height="200sp"
+                        android:layout_height="140sp"
                         android:layout_marginLeft="0sp"
                         android:layout_weight="1">
 

@@ -25,7 +25,7 @@ public class Splash extends AppCompatActivity {
 
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(Splash.this, MainActivity.class);
+                Intent i = new Intent(Splash.this, login.class);
                 // Intent i = new Intent(Splash .this, PREHomeActivity.class);
                 startActivity(i);
 

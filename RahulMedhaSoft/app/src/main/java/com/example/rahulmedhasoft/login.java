@@ -17,7 +17,7 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginButton = findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.btn_login);
 
         Toast.makeText(getApplicationContext(), "Login Page", Toast.LENGTH_SHORT).show();
 

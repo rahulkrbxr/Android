@@ -12,9 +12,9 @@
 <!--        <activity-->
 <!--            android:name=".ui.login.LoginActivity"-->
 <!--            android:label="@string/title_activity_login"></activity>-->
-        <activity android:name=".Splash" />
+        <activity android:name=".login" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".login">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
