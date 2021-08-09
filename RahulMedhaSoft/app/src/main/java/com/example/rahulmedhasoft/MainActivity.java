@@ -2,10 +2,15 @@ package com.example.rahulmedhasoft;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    LinearLayout linearLayoutLogOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,5 +23,15 @@ public class MainActivity extends AppCompatActivity {
 //
 //        Toast.makeText(this, "Username: " + value1 + "\n" + "Password: " +  value2, Toast.LENGTH_SHORT).show();
 
+        Toast.makeText(getApplicationContext(), "Main Activity Page", Toast.LENGTH_SHORT).show();
+
+        linearLayoutLogOut = findViewById(R.id.logout);
+        linearLayoutLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), login.class);
+                startActivity(intent);
+            }
+        });
     }
 }
