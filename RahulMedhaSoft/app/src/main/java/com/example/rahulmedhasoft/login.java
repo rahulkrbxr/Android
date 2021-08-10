@@ -2,9 +2,11 @@ package com.example.rahulmedhasoft;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,9 @@ public class login extends AppCompatActivity {
     String userMobileNumber;
     String userOtp;
 
+    SharedPreferences sharedpreferences;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +44,15 @@ public class login extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "login Page", Toast.LENGTH_SHORT).show();
 
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
                 login();
                 //abhinavkumar9315@gmail.com
-//                http://localhost:58639/WebServiceAPI.asmx?op=Schoollogin
+                //http://localhost:58639/WebServiceAPI.asmx?op=Schoollogin
             }
         });
 
@@ -56,28 +61,28 @@ public class login extends AppCompatActivity {
 
     public void login() {
 
-//        udisecode ="10280105518";
-//        umobnum = "9507638140";
-//        userotp = "3376";
+        userDiseCode ="10130507504";
+        userMobileNumber = "7004978930";
+        userOtp = "85013";
 
-        userDiseCode = editTextDiseCode.getText().toString();
-        userMobileNumber = editTextMobileNumber.getText().toString();
-        userOtp = editTextOtp.getText().toString();
+//        userDiseCode = editTextDiseCode.getText().toString();
+//        userMobileNumber = editTextMobileNumber.getText().toString();
+//        userOtp = editTextOtp.getText().toString();
+
 
         boolean cancelRegistration = false;
-      //  String isValied = "yes";
+        //  String isValied = "yes";
         View focusView = null;
 
         if (TextUtils.isEmpty(userDiseCode)) {
             editTextDiseCode.setError("Enter Dise Code");
             focusView = editTextDiseCode;
             cancelRegistration = true;
-        }
-        else if (TextUtils.isEmpty(userMobileNumber)) {
-            editTextMobileNumber.setError("Enter Dise Code");
+        } else if (TextUtils.isEmpty(userMobileNumber)) {
+            editTextMobileNumber.setError("Enter Mobile No");
             focusView = editTextMobileNumber;
             cancelRegistration = true;
-        } else if (editTextOtp.getText().length()< 4) {
+        } else if (editTextOtp.getText().length() < 4) {
             editTextOtp.setError("Enter Valid OTP");
             focusView = editTextOtp;
             cancelRegistration = true;
@@ -88,9 +93,10 @@ public class login extends AppCompatActivity {
             // error in login
             focusView.requestFocus();
         } else {
-            //userDetails = new UserDetails();
+            userDetails = new UserDetails();
             userDetails.setDiseCode(userDiseCode);
-            userDetails.setMobileNo(userOtp);
+            userDetails.setMobileNo(userMobileNumber);
+            userDetails.setOtp(userOtp);
             // new RegistrationTask().execute(userDetails);
             new Login().execute();
         }
@@ -118,13 +124,14 @@ public class login extends AppCompatActivity {
             }
             catch (Exception e)
             {
-
+//                Log.i("Error", String.valueOf(e));
+                Toast.makeText(login.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         protected String doInBackground(String... params) {
-            String res= WebServiceHelper.AuthenticatMethod(editTextDiseCode.getText().toString(),editTextMobileNumber.getText().toString(),editTextOtp.getText().toString());
+            String res= WebServiceHelper.AuthenticatMethod(userDiseCode, userMobileNumber, userOtp);
 
             return res;
         }
@@ -134,11 +141,20 @@ public class login extends AppCompatActivity {
 
             if (result!=null)
             {
+                sharedpreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                editor.putString("UserDiseCode", userDiseCode);
+                editor.putString("UserMobileNumber", userMobileNumber);
+                editor.putString("UserOtp", userOtp);
+                editor.commit();
+
                 Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
+            } else {
+                Toast.makeText(login.this, "Failed to get response from web service", Toast.LENGTH_SHORT).show();
             }
-
         }
 
 

@@ -29,12 +29,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-
-
 public class WebServiceHelper {
 
 
-     public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
+//  public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
+    public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
     public static final String SERVICEURL = "http://localhost:58639/WebServiceAPI.asmx";
     public static final String AuthenticateMethod = "SchoolLogin";
 
@@ -75,8 +74,6 @@ public class WebServiceHelper {
             androidHttpTransport.call(SERVICENAMESPACE + AuthenticateMethod,envelope);
             // res2 = (SoapObject) envelope.getResponse();
             rest = envelope.getResponse().toString();
-
-
 
         }
         catch (Exception e) {

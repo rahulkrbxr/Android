@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = app_preferences.edit();
         editor.putInt("counter", ++counter);
         editor.commit(); // Very important
-
     }
 
     private void Initialization()
