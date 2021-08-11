@@ -30,7 +30,7 @@ public class login extends AppCompatActivity {
     String userOtp;
 
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String MyPREFERENCES = "MyPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class login extends AppCompatActivity {
         editTextDiseCode = findViewById(R.id.editTextDiseCode);
         editTextMobileNumber = findViewById(R.id.editTextMobileNumber);
         editTextOtp = findViewById(R.id.editTextOtp);
-
+ 
         Toast.makeText(getApplicationContext(), "login Page", Toast.LENGTH_SHORT).show();
 
 
@@ -205,5 +205,4 @@ public class login extends AppCompatActivity {
 //            }
 //        }
     }
-
 }
