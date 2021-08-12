@@ -3,6 +3,7 @@ package com.example.rahulmedhasoft;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences = getSharedPreferences("userLoginDetails", 0);
+                preferences.edit().clear().apply();
                 Intent intent = new Intent(getApplicationContext(), login.class);
                 startActivity(intent);
             }

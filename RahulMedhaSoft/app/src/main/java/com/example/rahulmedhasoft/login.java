@@ -25,12 +25,12 @@ public class login extends AppCompatActivity {
     EditText editTextOtp;
     UserDetails userDetails;
 
-    String userDiseCode;
-    String userMobileNumber;
-    String userOtp;
+    String userDiseCode="";
+    String userMobileNumber="";
+    String userOtp="";
 
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "MyPrefs";
+//    public static final String MyPREFERENCES = "MyPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class login extends AppCompatActivity {
         editTextDiseCode = findViewById(R.id.editTextDiseCode);
         editTextMobileNumber = findViewById(R.id.editTextMobileNumber);
         editTextOtp = findViewById(R.id.editTextOtp);
+
  
         Toast.makeText(getApplicationContext(), "login Page", Toast.LENGTH_SHORT).show();
 
@@ -60,25 +61,25 @@ public class login extends AppCompatActivity {
 
 
     public void login() {
+//
+//        userDiseCode ="10130507504";
+//        userMobileNumber = "7004978930";
+//        userOtp = "85013";
 
-        userDiseCode ="10130507504";
-        userMobileNumber = "7004978930";
-        userOtp = "85013";
-
-//        userDiseCode = editTextDiseCode.getText().toString();
-//        userMobileNumber = editTextMobileNumber.getText().toString();
-//        userOtp = editTextOtp.getText().toString();
+        userDiseCode = editTextDiseCode.getText().toString().trim();
+        userMobileNumber = editTextMobileNumber.getText().toString().trim();
+        userOtp = editTextOtp.getText().toString().trim();
 
 
         boolean cancelRegistration = false;
         //  String isValied = "yes";
         View focusView = null;
 
-        if (TextUtils.isEmpty(userDiseCode)) {
+        if (TextUtils.isEmpty(editTextDiseCode.getText().toString())) {
             editTextDiseCode.setError("Enter Dise Code");
             focusView = editTextDiseCode;
             cancelRegistration = true;
-        } else if (TextUtils.isEmpty(userMobileNumber)) {
+        } else if (TextUtils.isEmpty(editTextMobileNumber.getText().toString())) {
             editTextMobileNumber.setError("Enter Mobile No");
             focusView = editTextMobileNumber;
             cancelRegistration = true;
@@ -141,13 +142,17 @@ public class login extends AppCompatActivity {
 
             if (result!=null)
             {
-                sharedpreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+                sharedpreferences = getSharedPreferences("userLoginDetails", 0);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
                 editor.putString("UserDiseCode", userDiseCode);
                 editor.putString("UserMobileNumber", userMobileNumber);
                 editor.putString("UserOtp", userOtp);
                 editor.commit();
+
+//                userDiseCode = sharedpreferences.getString("UserDiseCode", "");
+//                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
+//                userOtp = sharedpreferences.getString("UserOtp", "");
 
                 Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);

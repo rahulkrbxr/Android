@@ -33,9 +33,10 @@ public class WebServiceHelper {
 
 
 //  public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
-    public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
-    public static final String SERVICEURL = "http://localhost:58639/WebServiceAPI.asmx";
-    public static final String AuthenticateMethod = "SchoolLogin";
+    public static final String SERVICENAMESPACE = "http://10.133.20.135:4545/";
+    public static final String SERVICEURL = "http://192.168.43.191:4545/WebServiceAPI.asmx";
+//    public static final String SERVICEURL = "http://10.133.20.135:8081/WebServiceAPI.asmx";
+    public static final String AuthenticateMethod = "Authenticate";
 
     // public static final String SERVICENAMESPACE = "http://10.133.20.159/";
     // public static final String SERVICEURL = "http://localhost:58639/WebServiceAPI.asmx";
@@ -58,9 +59,6 @@ public class WebServiceHelper {
         request.addProperty("DiseCode", diceCode);
         request.addProperty("MobileNumber", mobno);
         request.addProperty("otp", otp);
-
-
-
 
         try {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
