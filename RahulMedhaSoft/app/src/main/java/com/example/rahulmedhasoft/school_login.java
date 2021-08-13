@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.rahulmedhasoft.database.WebServiceHelper;
 import com.example.rahulmedhasoft.entity.UserDetails;
 
-public class login extends AppCompatActivity {
+public class school_login extends AppCompatActivity {
 
     Button loginButton;
     EditText editTextDiseCode;
@@ -25,9 +24,9 @@ public class login extends AppCompatActivity {
     EditText editTextOtp;
     UserDetails userDetails;
 
-    String userDiseCode="";
-    String userMobileNumber="";
-    String userOtp="";
+    public String userDiseCode="";
+    public String userMobileNumber="";
+    public String userOtp="";
 
     SharedPreferences sharedpreferences;
 //    public static final String MyPREFERENCES = "MyPrefs";
@@ -35,7 +34,7 @@ public class login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_school_login);
 
         loginButton = findViewById(R.id.btn_login);
         editTextDiseCode = findViewById(R.id.editTextDiseCode);
@@ -43,9 +42,7 @@ public class login extends AppCompatActivity {
         editTextOtp = findViewById(R.id.editTextOtp);
 
  
-        Toast.makeText(getApplicationContext(), "login Page", Toast.LENGTH_SHORT).show();
-
-
+        Toast.makeText(getApplicationContext(), "school_login Page", Toast.LENGTH_SHORT).show();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +88,7 @@ public class login extends AppCompatActivity {
 
 
         if (cancelRegistration) {
-            // error in login
+            // error in school_login
             focusView.requestFocus();
         } else {
             userDetails = new UserDetails();
@@ -105,7 +102,7 @@ public class login extends AppCompatActivity {
 
     private class Login extends AsyncTask<String, Void, String> {
 
-        private ProgressDialog dialog = new ProgressDialog(login.this);
+        private ProgressDialog dialog = new ProgressDialog(school_login.this);
 
 
         protected void onPreExecute() {
@@ -117,7 +114,7 @@ public class login extends AppCompatActivity {
                 }
                 else
                 {
-                    dialog = new ProgressDialog(login.this);
+                    dialog = new ProgressDialog(school_login.this);
                     dialog.setMessage("Verifying your credential.\nPlease wait...");
 
                     dialog.show();
@@ -126,7 +123,7 @@ public class login extends AppCompatActivity {
             catch (Exception e)
             {
 //                Log.i("Error", String.valueOf(e));
-                Toast.makeText(login.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
+                Toast.makeText(school_login.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -142,6 +139,8 @@ public class login extends AppCompatActivity {
 
             if (result!=null)
             {
+                // when input details is verified saved the details to
+                // userDiseCode, userMobileNumber, userOtp
                 sharedpreferences = getSharedPreferences("userLoginDetails", 0);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
@@ -150,15 +149,27 @@ public class login extends AppCompatActivity {
                 editor.putString("UserOtp", userOtp);
                 editor.commit();
 
+                // verified user credentials
+                // saving details on string varible
+                // for further bypassing login
+                userDiseCode = sharedpreferences.getString("UserDiseCode", "");
+                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
+                userOtp = sharedpreferences.getString("UserOtp", "");
+
 //                userDiseCode = sharedpreferences.getString("UserDiseCode", "");
 //                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
 //                userOtp = sharedpreferences.getString("UserOtp", "");
 
-                Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(school_login.this, result, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             } else {
-                Toast.makeText(login.this, "Failed to get response from web service", Toast.LENGTH_SHORT).show();
+                // when input detail is wrong, empty the user info
+                userDiseCode = "";
+                userMobileNumber = "";
+                userOtp = "";
+
+                Toast.makeText(school_login.this, "Failed to get response from web service", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -174,14 +185,14 @@ public class login extends AppCompatActivity {
 //            if (result != null) {
 //                if (result.get_IsActive().equalsIgnoreCase("Y")) {
 //                    try {
-//                        DataBaseHelper placeData = new DataBaseHelper(login.this);
+//                        DataBaseHelper placeData = new DataBaseHelper(school_login.this);
 //                        c = placeData.insertAllUserDetails(result);
 //                        if (c > 0) {
 //                            // new   DwnldProvisionalMarks().execute();
 //                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DISECODE", _dcode).commit();
 //                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("OTP", _otp).commit();
-//                            Intent intent=new Intent(login.this, Main2Activity.class);
-//                            //Intent intent=new Intent(login.this, HomeActivity.class);
+//                            Intent intent=new Intent(school_login.this, Main2Activity.class);
+//                            //Intent intent=new Intent(school_login.this, HomeActivity.class);
 //                            startActivity(intent);
 //                            finish();
 //                        }
@@ -190,7 +201,7 @@ public class login extends AppCompatActivity {
 //                    }
 //                }
 //                else {
-//                    AlertDialog.Builder ab = new AlertDialog.Builder(login.this);
+//                    AlertDialog.Builder ab = new AlertDialog.Builder(school_login.this);
 //                    ab.setTitle("INVALID");
 //                    ab.setMessage("User is not active");
 //                    ab.setPositiveButton("OK",

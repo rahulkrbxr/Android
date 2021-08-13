@@ -12,7 +12,8 @@ public class UserDetails implements KvmSerializable {
     private String MobileNo = "";
     private String Otp = "";
 
-    // public userDetails() {}
+
+//     public userDetails() {}
     //public userDetails(SoapObject obj) {}
 
     public String getLoginStatus() {

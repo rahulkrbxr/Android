@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         newQuestion();
         playAgainButton.setVisibility(View.INVISIBLE);
 
-        new CountDownTimer(10100, 1000) {
+        new CountDownTimer(30100, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {

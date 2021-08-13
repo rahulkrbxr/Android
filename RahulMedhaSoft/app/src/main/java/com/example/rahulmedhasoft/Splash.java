@@ -29,7 +29,7 @@ public class Splash extends AppCompatActivity {
 
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i; // = new Intent(Splash.this, login.class);
+                Intent i; // = new Intent(Splash.this, school_login.class);
                 // Intent i = new Intent(Splash .this, PREHomeActivity.class);
 //                startActivity(i);
 
@@ -40,7 +40,7 @@ public class Splash extends AppCompatActivity {
 
                 if(userDiseCode.isEmpty() || userMobileNumber.isEmpty() || userOtp.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Empty Shared Preferances", Toast.LENGTH_SHORT).show();
-                    i = new Intent(Splash.this, login.class);
+                    i = new Intent(Splash.this, prelogin.class);
                 } else {
                     Toast.makeText(Splash.this, "Dise: " + userDiseCode+"\n"+
                             "Mobile: "+userMobileNumber+"\n"+
@@ -51,7 +51,7 @@ public class Splash extends AppCompatActivity {
 
 //
 //                if(userDiseCode.isEmpty() || userMobileNumber.isEmpty() || userOtp.isEmpty()) {
-//                    Intent i = new Intent(Splash.this, login.class);
+//                    Intent i = new Intent(Splash.this, school_login.class);
 //                    startActivity(i);
 //                } else {
 //                    Intent i = new Intent(Splash.this, MainActivity.class);
@@ -97,7 +97,7 @@ public class Splash extends AppCompatActivity {
 //
 //
 //        if (cancelRegistration) {
-//            // error in login
+//            // error in school_login
 //            focusView.requestFocus();
 //        } else {
 //            //userDetails = new UserDetails();

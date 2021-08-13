@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout linearLayoutLogOut;
+    LinearLayout lin_logout;
+    LinearLayout lin_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,22 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Main Activity Page", Toast.LENGTH_SHORT).show();
 
-        linearLayoutLogOut = findViewById(R.id.logout);
-        linearLayoutLogOut.setOnClickListener(new View.OnClickListener() {
+        lin_logout = findViewById(R.id.lin_logout);
+        lin_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences preferences = getSharedPreferences("userLoginDetails", 0);
                 preferences.edit().clear().apply();
-                Intent intent = new Intent(getApplicationContext(), login.class);
+                Intent intent = new Intent(getApplicationContext(), school_login.class);
+                startActivity(intent);
+            }
+        });
+
+        lin_home = findViewById(R.id.lin_home);
+        lin_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), prelogin.class);
                 startActivity(intent);
             }
         });

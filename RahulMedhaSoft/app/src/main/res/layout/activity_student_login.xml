@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="345dp"
-            android:layout_height="370dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dise Code"
-                    android:textColor="#009688"
+                    android:textColor="@color/medha_skyBlue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
                 <EditText
@@ -62,73 +62,23 @@
                     android:textColorHint="#999797"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mobile Number"
-                    android:textColor="#009688"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editTextMobileNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/edittext_style"
-                    android:hint="Please Enter Mobile Number"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:padding="10dp"
-                    android:singleLine="true"
-                    android:textColor="#222222"
-                    android:textColorHint="#999797"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="OTP"
-                    android:textColor="#009688"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editTextOtp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/edittext_style"
-                    android:hint="Please Enter 4 Digit OTP"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:padding="10dp"
-                    android:singleLine="true"
-                    android:textColor="#222222"
-                    android:textColorHint="#999797"
-                    android:textSize="18sp" />
-
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_student_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:backgroundTint="#009688"
+                android:backgroundTint="@color/medha_skyBlue"
                 android:onClick="SubmitOnclick"
                 android:padding="1dp"
                 android:text="LOGIN"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
-<!--            android:background="@drawable/loginbutton"-->
+            <!--            android:background="@drawable/loginbutton"-->
 
         </LinearLayout>
-        
+
     </FrameLayout>
 
 </RelativeLayout>
