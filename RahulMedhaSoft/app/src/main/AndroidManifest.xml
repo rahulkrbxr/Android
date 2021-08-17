@@ -19,21 +19,15 @@
             android:name=".student_details"
             android:label="@string/title_activity_student_details"/>
         <activity
-            android:name=".student_login"
-            android:label="@string/title_activity_student_login"/>
-        <activity
             android:name=".Splash"
             android:screenOrientation="portrait" /> <!-- <activity -->
-        <!-- android:name=".ui.school_login.LoginActivity" -->
+        <!-- android:name=".ui.login.LoginActivity" -->
         <!-- android:label="@string/title_activity_login"></activity> -->
-        <activity
-            android:name=".school_login"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".prelogin"
+            android:name=".login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

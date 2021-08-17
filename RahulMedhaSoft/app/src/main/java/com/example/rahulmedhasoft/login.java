@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.rahulmedhasoft.database.WebServiceHelper;
 import com.example.rahulmedhasoft.entity.UserDetails;
 
-public class school_login extends AppCompatActivity {
+public class login extends AppCompatActivity {
 
     Button loginButton;
     EditText editTextDiseCode;
@@ -34,15 +34,15 @@ public class school_login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_school_login);
+        setContentView(R.layout.activity_login);
 
         loginButton = findViewById(R.id.btn_login);
         editTextDiseCode = findViewById(R.id.editTextDiseCode);
         editTextMobileNumber = findViewById(R.id.editTextMobileNumber);
         editTextOtp = findViewById(R.id.editTextOtp);
 
- 
-        Toast.makeText(getApplicationContext(), "school_login Page", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getApplicationContext(), "login Page", Toast.LENGTH_SHORT).show();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +61,27 @@ public class school_login extends AppCompatActivity {
 //
 //        userDiseCode ="10130507504";
 //        userMobileNumber = "7004978930";
-//        userOtp = "85013";
+//        userOtp = "8501";
+
+
+//        sharedpreferences = getSharedPreferences("UserDiseCode", 0);
+//        String UserDiseCode = sharedpreferences.getString("UserDiseCode", "");
+//        sharedpreferences = getSharedPreferences("UserMobileNumber", 0);
+//        String UserMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
+//        sharedpreferences = getSharedPreferences("UserOtp", 0);
+//        String UserOtp = sharedpreferences.getString("UserOtp", "");
+//
+//        if ( (UserDiseCode != null) && (UserMobileNumber != null) && (UserOtp != null) ) {
+//            editTextDiseCode.setText(UserDiseCode);
+//            editTextMobileNumber.setText(UserMobileNumber);
+//            editTextOtp.setText(UserOtp);
+//        }
+//    }
+
 
         userDiseCode = editTextDiseCode.getText().toString().trim();
         userMobileNumber = editTextMobileNumber.getText().toString().trim();
         userOtp = editTextOtp.getText().toString().trim();
-
 
         boolean cancelRegistration = false;
         //  String isValied = "yes";
@@ -88,7 +103,7 @@ public class school_login extends AppCompatActivity {
 
 
         if (cancelRegistration) {
-            // error in school_login
+            // error in login
             focusView.requestFocus();
         } else {
             userDetails = new UserDetails();
@@ -102,28 +117,22 @@ public class school_login extends AppCompatActivity {
 
     private class Login extends AsyncTask<String, Void, String> {
 
-        private ProgressDialog dialog = new ProgressDialog(school_login.this);
+        private ProgressDialog dialog = new ProgressDialog(login.this);
 
 
         protected void onPreExecute() {
             try {
-                if(dialog!=null) {
-                    dialog.setMessage("Verifying your credential.\nPlease wait...");
+                if (dialog == null) {
+                    dialog = new ProgressDialog(login.this);
 
-                    dialog.show();
                 }
-                else
-                {
-                    dialog = new ProgressDialog(school_login.this);
-                    dialog.setMessage("Verifying your credential.\nPlease wait...");
-
-                    dialog.show();
-                }
+                dialog.setMessage("Verifying your credential.\nPlease wait...");
+                dialog.show();
             }
             catch (Exception e)
             {
 //                Log.i("Error", String.valueOf(e));
-                Toast.makeText(school_login.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
+                Toast.makeText(login.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -147,7 +156,7 @@ public class school_login extends AppCompatActivity {
                 editor.putString("UserDiseCode", userDiseCode);
                 editor.putString("UserMobileNumber", userMobileNumber);
                 editor.putString("UserOtp", userOtp);
-                editor.commit();
+                editor.apply();
 
                 // verified user credentials
                 // saving details on string varible
@@ -160,7 +169,7 @@ public class school_login extends AppCompatActivity {
 //                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
 //                userOtp = sharedpreferences.getString("UserOtp", "");
 
-                Toast.makeText(school_login.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             } else {
@@ -169,56 +178,8 @@ public class school_login extends AppCompatActivity {
                 userMobileNumber = "";
                 userOtp = "";
 
-                Toast.makeText(school_login.this, "Failed to get response from web service", Toast.LENGTH_SHORT).show();
+                Toast.makeText(login.this, "Failed to get response from web service", Toast.LENGTH_SHORT).show();
             }
         }
-
-
-//        @Override
-//        protected void onPostExecute(Get_usersalldetails result) {
-//            super.onPostExecute(result);
-//
-//            if (dialog.isShowing()) {
-//                dialog.dismiss();
-//            }
-//            long c =0;
-//            if (result != null) {
-//                if (result.get_IsActive().equalsIgnoreCase("Y")) {
-//                    try {
-//                        DataBaseHelper placeData = new DataBaseHelper(school_login.this);
-//                        c = placeData.insertAllUserDetails(result);
-//                        if (c > 0) {
-//                            // new   DwnldProvisionalMarks().execute();
-//                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DISECODE", _dcode).commit();
-//                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("OTP", _otp).commit();
-//                            Intent intent=new Intent(school_login.this, Main2Activity.class);
-//                            //Intent intent=new Intent(school_login.this, HomeActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//                    }catch (Exception e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//                else {
-//                    AlertDialog.Builder ab = new AlertDialog.Builder(school_login.this);
-//                    ab.setTitle("INVALID");
-//                    ab.setMessage("User is not active");
-//                    ab.setPositiveButton("OK",
-//                            new Dialoginterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(Dialoginterface dialog, int whichButton) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//
-//                    ab.show();
-//                }
-//
-//            }
-//            else{
-//                Toast.makeText(getApplicationContext(),"Response null",Toast.LENGTH_LONG).show();
-//            }
-//        }
     }
 }

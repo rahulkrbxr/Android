@@ -47,7 +47,7 @@ public class student_details extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String text = position + " " + ((TextView)view).getText().toString();
-                Toast.makeText(student_details.this, "text", Toast.LENGTH_SHORT).show();
+                Toast.makeText(student_details.this, text, Toast.LENGTH_SHORT).show();
             }
         });
     }

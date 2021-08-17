@@ -68,7 +68,7 @@
                 android:layout_below="@+id/user_name"
                 android:gravity="center"
                 android:padding="6dp"
-                android:text="Dise Coder"
+                android:text="Dise Code"
                 android:textSize="16sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />

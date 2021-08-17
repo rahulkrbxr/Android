@@ -6,7 +6,7 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.Hashtable;
 
-public class GetStudentDetails implements KvmSerializable {
+public class StudentInfo implements KvmSerializable {
 
     private String ResultStatusMesg = "";
     private String a_Id = "";
@@ -23,46 +23,23 @@ public class GetStudentDetails implements KvmSerializable {
     private String eupi_BenNameasPerBank = "";
     private String maxscore = "";
 
-    public GetStudentDetails() {
+    public StudentInfo() {}
 
-    }
-
-    public GetStudentDetails(SoapObject obj) {
-        this.setResultStatusMesg(obj.getProperty("_ResultStatusMesg").toString());
-        this.setA_Id(obj.getProperty("_A_Id").toString());
-        this.setBeneficieryId(obj.getProperty("_BeneficieryId").toString());
-        this.setDiseCode(obj.getProperty("_DiseCode").toString());
-        this.setClassId(obj.getProperty("_ClassId").toString());
-        this.setBeneficieryName(obj.getProperty("_BeneficieryName").toString());
-        this.setFHName(obj.getProperty("_FHName").toString());
-        this.setMName(obj.getProperty("_MNName").toString());
-        this.setGender(obj.getProperty("_Gender").toString());
-        this.setDOB(obj.getProperty("_DOB").toString());
-        this.setBenAccountNo(obj.getProperty("_BenAccountNo").toString());
-        this.setIFSCCode(obj.getProperty("_IFSCCode").toString());
-        this.setEupi_BenNameasPerBank(obj.getProperty("_Eupi_BenNameasPerBank").toString());
-        this.setMaxscore(obj.getProperty("_Maxscore").toString());
-    }
-
-
-    @Override
-    public Object getProperty(int i) {
-        return null;
-    }
-
-    @Override
-    public int getPropertyCount() {
-        return 0;
-    }
-
-    @Override
-    public void setProperty(int i, Object o) {
-
-    }
-
-    @Override
-    public void getPropertyInfo(int i, Hashtable hashtable, PropertyInfo propertyInfo) {
-
+    public StudentInfo(SoapObject obj) {
+        this.setResultStatusMesg(obj.getProperty("ResultStatusMesg").toString());
+        this.setA_Id(obj.getProperty("a_Id").toString());
+        this.setBeneficieryId(obj.getProperty("BeneficieryId").toString());
+        this.setDiseCode(obj.getProperty("DiseCode").toString());
+        this.setClassId(obj.getProperty("ClassId").toString());
+        this.setBeneficieryName(obj.getProperty("BeneficieryName").toString());
+        this.setFHName(obj.getProperty("FHName").toString());
+        this.setMName(obj.getProperty("MName").toString());
+        this.setGender(obj.getProperty("Gender").toString());
+        this.setDOB(obj.getProperty("DOB").toString());
+        this.setBenAccountNo(obj.getProperty("BenAccountNo").toString());
+        this.setIFSCCode(obj.getProperty("IFSCCode").toString());
+        this.setEupi_BenNameasPerBank(obj.getProperty("eupi_BenNameasPerBank").toString());
+        this.setMaxscore(obj.getProperty("maxscore").toString());
     }
 
     public String getResultStatusMesg() {
@@ -176,4 +153,25 @@ public class GetStudentDetails implements KvmSerializable {
     public void setMaxscore(String maxscore) {
         this.maxscore = maxscore;
     }
+
+    @Override
+    public Object getProperty(int i) {
+        return null;
+    }
+
+    @Override
+    public int getPropertyCount() {
+        return 0;
+    }
+
+    @Override
+    public void setProperty(int i, Object o) {
+
+    }
+
+    @Override
+    public void getPropertyInfo(int i, Hashtable hashtable, PropertyInfo propertyInfo) {
+
+    }
+
 }
