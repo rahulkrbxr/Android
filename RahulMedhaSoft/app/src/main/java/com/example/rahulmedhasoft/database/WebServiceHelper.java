@@ -1,17 +1,21 @@
 package com.example.rahulmedhasoft.database;
 
 
+import com.example.rahulmedhasoft.entity.StudentInfo;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.util.ArrayList;
+
 public class WebServiceHelper {
 
 
 //  public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
-    public static final String SERVICENAMESPACE = "http://192.168.43.191:4545/";
-    public static final String SERVICEURL = "http://192.168.43.191:4545/WebServiceAPI.asmx";
+    public static final String SERVICENAMESPACE = "http://10.133.20.135:4545/";
+    public static final String SERVICEURL = "http://10.133.20.135:4545/WebServiceAPI.asmx";
 //    public static final String SERVICEURL = "http://10.133.20.135:8081/WebServiceAPI.asmx";
     public static final String AuthenticateMethod = "Authenticate";
     public static final String AuthenticateMethodStudents = "Student_Details";
@@ -60,33 +64,49 @@ public class WebServiceHelper {
         return rest.toString();
     }
 
-    public Object GetStudentWebService(String diceCode)
+    // dise login GET - POST from web
+    public static  StudentInfo GetStudentList(String diceCode)
     {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, AuthenticateMethodStudents);
 
         request.addProperty("DiseCode", diceCode);
+        SoapObject res1;
 
         try {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
                     SoapEnvelope.VER11);
             envelope.dotNet = true;
-            envelope.implicitTypes = true;
             envelope.setOutputSoapObject(request);
-
             HttpTransportSE androidHttpTransport = new HttpTransportSE(
                     SERVICEURL);
             androidHttpTransport.call(SERVICENAMESPACE + AuthenticateMethodStudents,envelope);
             // res2 = (SoapObject) envelope.getResponse();
-            rest = envelope.getResponse();
+            res1 = (SoapObject)envelope.getResponse();
 
         }
         catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        int totalProperty = res1.getPropertyCount();
+        ArrayList<StudentInfo> arrayListStudentInfo = new ArrayList<>();
+        if(totalProperty>0) {
+            for (int i=0; i<totalProperty; i++) {
+                if(res1.getProperty(i) != null) {
+                    Object property = res1.getProperty(i);
+                    if(property instanceof SoapObject) {
+                        SoapObject final_object = (SoapObject) property;
+                        StudentInfo studentInfo = new StudentInfo(final_object);
+                        arrayListStudentInfo.add(studentInfo);
+                    }
+                } else {
+                    return arrayListStudentInfo;
+                }
+            }
+        }
 
-        return rest;
+        return arrayListStudentInfo;
     }
 }
 

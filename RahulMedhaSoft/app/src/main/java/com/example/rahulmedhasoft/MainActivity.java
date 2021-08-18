@@ -2,12 +2,21 @@ package com.example.rahulmedhasoft;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.rahulmedhasoft.database.WebServiceHelper;
+import com.example.rahulmedhasoft.entity.StudentInfo;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,13 +27,16 @@ public class MainActivity extends AppCompatActivity {
     TextView mobileNo;
     TextView otp;
 
+    SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
+    String UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
-        String UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
+//        SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
+//        String UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
         diseCode = findViewById(R.id.user_dise);
         diseCode.setText("Dise Code: " + UserDiseCode);
         String UserMobileNumber = sharedPreferences.getString("UserMobileNumber", "");
@@ -67,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         lin_attendane.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, student_details.class);
-                startActivity(i);
+//                Intent i = new Intent(MainActivity.this, student_details.class);
+//                startActivity(i);
 
                 new markAttendance();
             }
@@ -78,6 +90,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class markAttendance {
+    private class markAttendance extends AsyncTask<String, Void, StudentInfo> {
+
+        private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            try {
+                if (dialog == null) {
+                    dialog = new ProgressDialog(MainActivity.this);
+
+                }
+                dialog.setMessage("Verifying your credential.\nPlease wait...");
+                dialog.show();
+            }
+            catch (Exception e) {
+                Toast.makeText(MainActivity.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected StudentInfo doInBackground(String... strings) {
+            return WebServiceHelper.GetStudentList(UserDiseCode);
+        }
+
+        @Override
+        protected void onPostExecute(StudentInfo s) {
+
+        }
     }
 }

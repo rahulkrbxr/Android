@@ -129,8 +129,7 @@ public class login extends AppCompatActivity {
                 dialog.setMessage("Verifying your credential.\nPlease wait...");
                 dialog.show();
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
 //                Log.i("Error", String.valueOf(e));
                 Toast.makeText(login.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
             }
@@ -169,9 +168,14 @@ public class login extends AppCompatActivity {
 //                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
 //                userOtp = sharedpreferences.getString("UserOtp", "");
 
+                // condition to check if credential are correct
+                if(result.equals("1-Login Successfully ")) {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                }
+
                 Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
+
             } else {
                 // when input detail is wrong, empty the user info
                 userDiseCode = "";

@@ -4,9 +4,10 @@ import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class StudentInfo implements KvmSerializable {
+public class StudentInfo extends ArrayList<StudentInfo> implements KvmSerializable {
 
     private String ResultStatusMesg = "";
     private String a_Id = "";
