@@ -9,6 +9,8 @@ import java.util.Hashtable;
 
 public class StudentInfo extends ArrayList<StudentInfo> implements KvmSerializable {
 
+    public static Class<StudentInfo> getdata = StudentInfo.class;
+
     private String ResultStatusMesg = "";
     private String a_Id = "";
     private String BeneficieryId = "";

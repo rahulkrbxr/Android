@@ -18,13 +18,14 @@ public class WebServiceHelper {
     public static final String SERVICEURL = "http://10.133.20.135:4545/WebServiceAPI.asmx";
 //    public static final String SERVICEURL = "http://10.133.20.135:8081/WebServiceAPI.asmx";
     public static final String AuthenticateMethod = "Authenticate";
-    public static final String AuthenticateMethodStudents = "Student_Details";
+    public static final String GetStudentList = "Student_Details";
 
     // public static final String SERVICENAMESPACE = "http://10.133.20.159/";
     // public static final String SERVICEURL = "http://localhost:58639/WebServiceAPI.asmx";
 
     public static final String loginStatus = "1-Login not Successful";
     static Object rest;
+    private SoapObject request;
 
 
 //    public static GetUserallDetails(String dcode, String mobnum, String otp) {
@@ -64,49 +65,50 @@ public class WebServiceHelper {
         return rest.toString();
     }
 
-    // dise login GET - POST from web
-    public static  StudentInfo GetStudentList(String diceCode)
-    {
 
-        SoapObject request = new SoapObject(SERVICENAMESPACE, AuthenticateMethodStudents);
+    public static ArrayList<StudentInfo> GetStudentList(String disecode) {
 
-        request.addProperty("DiseCode", diceCode);
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GetStudentList);
+
+        request.addProperty("DiseCode", disecode);
+
         SoapObject res1;
-
         try {
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                    SoapEnvelope.VER11);
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                    SERVICEURL);
-            androidHttpTransport.call(SERVICENAMESPACE + AuthenticateMethodStudents,envelope);
-            // res2 = (SoapObject) envelope.getResponse();
-            res1 = (SoapObject)envelope.getResponse();
+            envelope.addMapping(SERVICENAMESPACE, StudentInfo.getdata.getSimpleName(), StudentInfo.getdata);
 
-        }
-        catch (Exception e) {
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GetStudentList, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        int totalProperty = res1.getPropertyCount();
-        ArrayList<StudentInfo> arrayListStudentInfo = new ArrayList<>();
-        if(totalProperty>0) {
-            for (int i=0; i<totalProperty; i++) {
-                if(res1.getProperty(i) != null) {
-                    Object property = res1.getProperty(i);
-                    if(property instanceof SoapObject) {
+        int TotalProperty = res1.getPropertyCount();
+        ArrayList<StudentInfo> pvmArrayList = new ArrayList<StudentInfo>();
+        if(TotalProperty>0) {
+
+
+            for (int ii = 0; ii < TotalProperty; ii++) {
+                if (res1.getProperty(ii) != null) {
+                    Object property = res1.getProperty(ii);
+                    if (property instanceof SoapObject) {
                         SoapObject final_object = (SoapObject) property;
-                        StudentInfo studentInfo = new StudentInfo(final_object);
-                        arrayListStudentInfo.add(studentInfo);
+                        StudentInfo state = new StudentInfo(final_object);
+                        pvmArrayList.add(state);
                     }
-                } else {
-                    return arrayListStudentInfo;
-                }
+                } else
+                    return pvmArrayList;
             }
         }
 
-        return arrayListStudentInfo;
+        return pvmArrayList;
     }
+
 }
 

@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             long c = 0;
             if (result != null) {
                 if (result.getAuthenticated()) {
-
                         Log.d("username",result.get_UserName());
                     if (result.get_Role().equalsIgnoreCase("JEADM")||result.get_Role().equalsIgnoreCase("AEADM")||result.get_Role().equalsIgnoreCase("EEADM")||result.get_Role().equalsIgnoreCase("SEADM")) {
                         dialog.dismiss();

@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -82,15 +84,16 @@ public class MainActivity extends AppCompatActivity {
 //                Intent i = new Intent(MainActivity.this, student_details.class);
 //                startActivity(i);
 
-                new markAttendance();
+                if(UserDiseCode.equals(""))
+                    Toast.makeText(getApplicationContext(), "Dise Code not available", Toast.LENGTH_LONG).show();
+                else
+                    new MarkAttendance().execute();
             }
         });
-
-
-
     }
 
-    private class markAttendance extends AsyncTask<String, Void, StudentInfo> {
+
+    private class MarkAttendance extends AsyncTask<String, Void, ArrayList<StudentInfo>> {
 
         private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
 
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     dialog = new ProgressDialog(MainActivity.this);
 
                 }
-                dialog.setMessage("Verifying your credential.\nPlease wait...");
+                dialog.setMessage("Fetching results.\nPlease wait...");
                 dialog.show();
             }
             catch (Exception e) {
@@ -111,13 +114,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected StudentInfo doInBackground(String... strings) {
+        protected ArrayList<StudentInfo> doInBackground(String... strings) {
             return WebServiceHelper.GetStudentList(UserDiseCode);
         }
 
         @Override
-        protected void onPostExecute(StudentInfo s) {
+        protected void onPostExecute(ArrayList<StudentInfo> pvmArrayList) {
+            super.onPostExecute(pvmArrayList);
 
+            Log.d("Student list :" ,""+pvmArrayList.size());
         }
     }
 }

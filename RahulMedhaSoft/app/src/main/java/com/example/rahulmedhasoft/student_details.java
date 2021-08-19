@@ -2,6 +2,7 @@ package com.example.rahulmedhasoft;
 
 import android.os.Bundle;
 
+import com.example.rahulmedhasoft.entity.StudentInfo;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,13 @@ import java.util.ArrayList;
 public class student_details extends AppCompatActivity {
 
     ListView listViewStudent;
+    StudentInfo studentInfo;
+    public student_details(StudentInfo studentInfo) {
+        for (StudentInfo info : this.studentInfo = studentInfo) {
+            
+        }
+        ;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +43,8 @@ public class student_details extends AppCompatActivity {
 
         ArrayList<String> country = new ArrayList<>();
         country.add("India");
-        country.add("Pakistan");
-        country.add("Nepal");
+        country.add("Greece");
+        country.add("UK");
         country.add("Germany");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, country);
