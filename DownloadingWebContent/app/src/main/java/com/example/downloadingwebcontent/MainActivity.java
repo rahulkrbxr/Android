@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +15,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
 
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        textView = findViewById(R.id.textView);
+        textView.setText(result);
         Log.i("Result", result);
     }
 }
