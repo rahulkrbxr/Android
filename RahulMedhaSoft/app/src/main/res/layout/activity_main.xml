@@ -97,60 +97,60 @@
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="12dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingTop="12dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:weightSum="2">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
 
-                    <ImageView
-                        android:id="@+id/syn"
-                        android:layout_width="25sp"
-                        android:layout_height="18sp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/synch" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/syn"-->
+<!--                        android:layout_width="25sp"-->
+<!--                        android:layout_height="18sp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:src="@drawable/synch" />-->
 
-                    <TextView
-                        android:id="@+id/syn_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="2dp"
-                        android:text="Fetch Current Record"
-                        android:textSize="16sp"
-                        android:textColor="#8d1010"
-                        android:textStyle="bold" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/syn_name"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="2dp"-->
+<!--                        android:text="Fetch Current Record"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textColor="#8d1010"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
 
-                    <ImageView
-                        android:id="@+id/inf"
-                        android:layout_width="25sp"
-                        android:layout_height="18sp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/infosml" />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/inf"-->
+<!--                        android:layout_width="25sp"-->
+<!--                        android:layout_height="18sp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:src="@drawable/infosml" />-->
 
-                    <TextView
-                        android:id="@+id/sch_instructions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="2dp"
-                        android:text="स्टूडेंट चेक लिस्ट आवश्यक सूचना"
-                        android:textSize="16sp"
-                        android:textColor="#a4ad58"
-                        android:textStyle="bold" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/sch_instructions"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="2dp"-->
+<!--                        android:text="स्टूडेंट चेक लिस्ट आवश्यक सूचना"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textColor="#a4ad58"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
         </LinearLayout>

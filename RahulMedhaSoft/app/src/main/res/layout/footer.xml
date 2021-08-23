@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:layout_weight="1"
         android:padding="2dp"
-        android:text="Service provided by: DGRC (demo)"
+        android:text="Service provided by: (demo)"
         android:textColor="#f7f9fc"
         android:textSize="12sp"
         android:textStyle="bold"/>

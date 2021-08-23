@@ -29,16 +29,15 @@ public class MainActivity extends AppCompatActivity {
     TextView mobileNo;
     TextView otp;
 
-    SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
-    String UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
+    String UserDiseCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
-//        String UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
+        UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
         diseCode = findViewById(R.id.user_dise);
         diseCode.setText("Dise Code: " + UserDiseCode);
         String UserMobileNumber = sharedPreferences.getString("UserMobileNumber", "");
@@ -81,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         lin_attendane.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this, student_details.class);
-//                startActivity(i);
+                Intent i = new Intent(MainActivity.this, student_details.class);
+                startActivity(i);
 
                 if(UserDiseCode.equals(""))
                     Toast.makeText(getApplicationContext(), "Dise Code not available", Toast.LENGTH_LONG).show();

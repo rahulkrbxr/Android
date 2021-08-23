@@ -30,8 +30,7 @@ public class student_details extends AppCompatActivity {
     public student_details(StudentInfo studentInfo) {
         for (StudentInfo info : this.studentInfo = studentInfo) {
             
-        }
-        ;
+        };
     }
 
     @Override

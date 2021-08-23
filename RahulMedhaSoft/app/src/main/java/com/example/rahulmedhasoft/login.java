@@ -168,13 +168,12 @@ public class login extends AppCompatActivity {
 //                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
 //                userOtp = sharedpreferences.getString("UserOtp", "");
 
+                Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
                 // condition to check if credential are correct
                 if(result.equals("1-Login Successfully ")) {
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent i = new Intent(login.this, MainActivity.class);
                     startActivity(i);
                 }
-
-                Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
 
             } else {
                 // when input detail is wrong, empty the user info
