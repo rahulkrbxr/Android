@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                     result += current;
                     data = reader.read();
                 }
-
                 return result;
 
             } catch (Exception e) {

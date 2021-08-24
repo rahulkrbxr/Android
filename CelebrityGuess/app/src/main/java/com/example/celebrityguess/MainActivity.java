@@ -2,30 +2,124 @@ package com.example.celebrityguess;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.example.celebrityguess.R;
+import android.util.Log;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> celebURLs = new ArrayList<>();
+    TextView textView;
+
+    public class DownloadTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            String result = "";
+            URL url;
+            HttpsURLConnection urlConnection = null;
+
+            try {
+                url = new URL(urls[0]);
+                urlConnection = (HttpsURLConnection) url.openConnection();
+                InputStream in = urlConnection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(in);
+                int data = reader.read();
+
+                while(data != -1) {
+                    char current = (char) data;
+                    result += current;
+                    data = reader.read();
+                }
+                return result;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Failed";
+            }
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.test);
+
+        DownloadTask task = new DownloadTask();
+        String result=null;
+        try {
+            result = task.execute("https://www.imdb.com/list/ls052283250/", "https://www.google.com/", "https://zappycode.com/").get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        textView = findViewById(R.id.textView);
+        textView.setText(result);
+        Log.i("Result", result);
+    }
+
+
+//    TextView textView;
+//
+//    public class DownloadTask extends AsyncTask<String, Void, String> {
+//        @Override
+//        protected String doInBackground(String... urls) {
+//            String result = "";
+//            URL url;
+//            HttpURLConnection urlConnection = null;
+//            try {
+//                url = new URL(urls[0]);
+//                urlConnection = (HttpURLConnection) url.openConnection();
+//                InputStream in = urlConnection.getInputStream();
+//                InputStreamReader reader = new InputStreamReader(in);
+//                int data = reader.read();
+//                while(data != -1) {
+//                    char current = (char) data;
+//                    result += current;
+//                    data = reader.read();
+//                }
+//                return result;
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                return null;
+//            }
+//        }
+//    }
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.test);
+//
+//        textView = findViewById(R.id.textView);
+//
+//        DownloadTask task = new DownloadTask();
+//        String result = null;
+//
+//        try {
+//            result = task.execute("https://www.imdb.com/list/ls052283250/").get();
+//            Log.i("Contents of URL ", result);
+//            textView.setText(result);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+}
+
+/*
+
+ArrayList<String> celebURLs = new ArrayList<>();
     ArrayList<String> celebNames = new ArrayList<>();
     int chosenCeleb;
     String[] answers = new String[4];
@@ -178,4 +272,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-}
+
+ */
