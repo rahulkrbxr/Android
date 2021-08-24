@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-//            Log.i("JSON", s);
+            Log.i("JSON", s);
 
             try {
                 JSONObject jsonObject = new JSONObject(s);
