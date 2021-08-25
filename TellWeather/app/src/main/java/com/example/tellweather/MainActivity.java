@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             DownloadTask task = new DownloadTask();
+            // To handle spaces/whitespaces in city name (eg: sans fransisco)
+            // convert string to url format (...sans%20fransisco...)
             String encodedCityName = URLEncoder.encode(editText.getText().toString(), "UTF-8");
 
             task.execute("https://api.openweathermap.org/data/2.5/weather?q=" + encodedCityName + "&appid=3425e07036e5531f28a85b19d1e6ac8c").get();

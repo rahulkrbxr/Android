@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // Parsing a JSON Object In Android
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
                 String weatherInfo = jsonObject.getString("weather");
                 Log.i("Weather Content", weatherInfo);
-
                 JSONArray jsonArray = new JSONArray(weatherInfo);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonPart = jsonArray.getJSONObject(i);
