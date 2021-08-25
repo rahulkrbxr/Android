@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             task.execute("https://api.openweathermap.org/data/2.5/weather?q=" + encodedCityName + "&appid=3425e07036e5531f28a85b19d1e6ac8c").get();
 
+            // hides the keyboard, after click on button(onClick: getWeather)
             InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             mgr.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         } catch (Exception e) {
