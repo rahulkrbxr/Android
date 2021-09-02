@@ -21,17 +21,21 @@ public class ResultActivity extends AppCompatActivity {
 //        String key = "Sum";
         String ans = extras.getString("value");
 
+        Intent intent = getIntent();
+        String operation = intent.getStringExtra("operation");
+
         TextView text=(TextView)findViewById(R.id.resultTextView) ;
         text.setText(ans);
         
 //        result.setText(addition);
 
-        Toast.makeText(this, "Result = " + ans, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hi, " + operation + "\n" + "Result = " + ans, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Press back to add again!", Toast.LENGTH_SHORT).show();
     }
 
     public void goMainActivity(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//        startActivity(intent);
+        finish();
     }
 }
