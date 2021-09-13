@@ -35,6 +35,13 @@
             android:id="@+id/listViewStudents"
             android:layout_width="match_parent"
             android:layout_height="600dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is just a demo test"
+            android:textSize="24sp"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 

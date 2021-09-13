@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -29,31 +28,34 @@ public class MainActivity extends AppCompatActivity {
     TextView mobileNo;
     TextView otp;
 
-    String UserDiseCode;
+    private String userDiseCode="";
+    private String userMobileNumber="";
+    private String userOtp="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // success in retrieving data from login.java
+        Bundle bundle = getIntent().getExtras();
+        userDiseCode = bundle.getString("UserDiseCode");
+        userMobileNumber = bundle.getString("UserMobileNumber");
+        userOtp = bundle.getString("UserOtp");
+        finish();
+        
+        Toast.makeText(getApplicationContext(), userDiseCode + "\n" + userMobileNumber + "\n" + userOtp, Toast.LENGTH_SHORT).show();
+
         SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
-        UserDiseCode = sharedPreferences.getString("UserDiseCode", "");
+        userDiseCode = sharedPreferences.getString("UserDiseCode", "");
         diseCode = findViewById(R.id.user_dise);
-        diseCode.setText("Dise Code: " + UserDiseCode);
+        diseCode.setText("Dise Code: " + userDiseCode);
         String UserMobileNumber = sharedPreferences.getString("UserMobileNumber", "");
         mobileNo = findViewById(R.id.total_students_mid_day_meal);
-        mobileNo.setText("Mobile No: " + UserMobileNumber);
+        mobileNo.setText("Mobile No: " + userMobileNumber);
         String UserOtp = sharedPreferences.getString("UserOtp", "");
         otp = findViewById(R.id.total_students);
-        otp.setText("OTP: " + UserOtp);
-
-//        Bundle bundle = getIntent().getExtras();
-//        String value1 = bundle.getString("value1");
-//        String value2 = bundle.getString("value2");
-//
-//        Toast.makeText(this, "Username: " + value1 + "\n" + "Password: " +  value2, Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(getApplicationContext(), "Main Activity Page", Toast.LENGTH_SHORT).show();
+        otp.setText("OTP: " + userOtp);
 
         lin_logout = findViewById(R.id.lin_logout);
         lin_logout.setOnClickListener(new View.OnClickListener() {
@@ -80,48 +82,49 @@ public class MainActivity extends AppCompatActivity {
         lin_attendane.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, student_details.class);
+                Intent i = new Intent(MainActivity.this, StudentDetails.class);
+                i.putExtra("UserDiseCode", userDiseCode);
                 startActivity(i);
 
-                if(UserDiseCode.equals(""))
+                if(userDiseCode.equals(""))
                     Toast.makeText(getApplicationContext(), "Dise Code not available", Toast.LENGTH_LONG).show();
-                else
-                    new MarkAttendance().execute();
+//                else
+//                    new MarkAttendance().execute();
             }
         });
     }
 
 
-    private class MarkAttendance extends AsyncTask<String, Void, ArrayList<StudentInfo>> {
-
-        private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            try {
-                if (dialog == null) {
-                    dialog = new ProgressDialog(MainActivity.this);
-
-                }
-                dialog.setMessage("Fetching results.\nPlease wait...");
-                dialog.show();
-            }
-            catch (Exception e) {
-                Toast.makeText(MainActivity.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        protected ArrayList<StudentInfo> doInBackground(String... strings) {
-            return WebServiceHelper.GetStudentList(UserDiseCode);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<StudentInfo> pvmArrayList) {
-            super.onPostExecute(pvmArrayList);
-
-            Log.d("Student list :" ,""+pvmArrayList.size());
-        }
-    }
+//    private class MarkAttendance extends AsyncTask<String, Void, ArrayList<StudentInfo>> {
+//
+//        private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            try {
+//                if (dialog == null) {
+//                    dialog = new ProgressDialog(MainActivity.this);
+//
+//                }
+//                dialog.setMessage("Fetching results.\nPlease wait...");
+//                dialog.show();
+//            }
+//            catch (Exception e) {
+//                Toast.makeText(MainActivity.this, String.valueOf(e), Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//        @Override
+//        protected ArrayList<StudentInfo> doInBackground(String... strings) {
+//            return WebServiceHelper.GetStudentList(userDiseCode);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(ArrayList<StudentInfo> pvmArrayList) {
+//            super.onPostExecute(pvmArrayList);
+//
+//            Log.d("Student list :" ,""+pvmArrayList.size());
+//        }
+//    }
 }

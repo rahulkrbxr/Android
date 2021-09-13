@@ -1,6 +1,7 @@
 package com.example.rahulmedhasoft;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -24,11 +25,12 @@ public class login extends AppCompatActivity {
     EditText editTextOtp;
     UserDetails userDetails;
 
-    public String userDiseCode="";
-    public String userMobileNumber="";
-    public String userOtp="";
+    private String userDiseCode="";
+    private String userMobileNumber="";
+    private String userOtp="";
 
     SharedPreferences sharedpreferences;
+//    SharedPreferences sharedpreferences = getSharedPreferences("com.example.rahulmedhasoft", Context.MODE_PRIVATE);
 //    public static final String MyPREFERENCES = "MyPrefs";
 
     @Override
@@ -51,6 +53,7 @@ public class login extends AppCompatActivity {
                 login();
                 //abhinavkumar9315@gmail.com
                 //http://localhost:58639/WebServiceAPI.asmx?op=Schoollogin
+
             }
         });
 
@@ -58,26 +61,6 @@ public class login extends AppCompatActivity {
 
 
     public void login() {
-//
-//        userDiseCode ="10130507504";
-//        userMobileNumber = "7004978930";
-//        userOtp = "8501";
-
-
-//        sharedpreferences = getSharedPreferences("UserDiseCode", 0);
-//        String UserDiseCode = sharedpreferences.getString("UserDiseCode", "");
-//        sharedpreferences = getSharedPreferences("UserMobileNumber", 0);
-//        String UserMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
-//        sharedpreferences = getSharedPreferences("UserOtp", 0);
-//        String UserOtp = sharedpreferences.getString("UserOtp", "");
-//
-//        if ( (UserDiseCode != null) && (UserMobileNumber != null) && (UserOtp != null) ) {
-//            editTextDiseCode.setText(UserDiseCode);
-//            editTextMobileNumber.setText(UserMobileNumber);
-//            editTextOtp.setText(UserOtp);
-//        }
-//    }
-
 
         userDiseCode = editTextDiseCode.getText().toString().trim();
         userMobileNumber = editTextMobileNumber.getText().toString().trim();
@@ -139,7 +122,7 @@ public class login extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String res= WebServiceHelper.AuthenticatMethod(userDiseCode, userMobileNumber, userOtp);
 
-            return res;
+             return res;
         }
 
         @Override
@@ -149,7 +132,7 @@ public class login extends AppCompatActivity {
             {
                 // when input details is verified saved the details to
                 // userDiseCode, userMobileNumber, userOtp
-                sharedpreferences = getSharedPreferences("userLoginDetails", 0);
+                sharedpreferences = getSharedPreferences("com.example.rahulmedhasoft", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
                 editor.putString("UserDiseCode", userDiseCode);
@@ -172,7 +155,15 @@ public class login extends AppCompatActivity {
                 // condition to check if credential are correct
                 if(result.equals("1-Login Successfully ")) {
                     Intent i = new Intent(login.this, MainActivity.class);
+                    i.putExtra("UserDiseCode", userDiseCode);
+                    i.putExtra("UserMobileNumber", userMobileNumber);
+                    i.putExtra("UserOtp", userOtp);
                     startActivity(i);
+                } else {
+                    userDiseCode = "";
+                    userMobileNumber = "";
+                    userOtp = "";
+                    Toast.makeText(login.this, "Authentication Failed\nWrong credentials", Toast.LENGTH_SHORT).show();
                 }
 
             } else {
