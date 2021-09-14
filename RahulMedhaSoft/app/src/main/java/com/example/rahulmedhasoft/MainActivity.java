@@ -38,22 +38,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // success in retrieving data from login.java
-        Bundle bundle = getIntent().getExtras();
-        userDiseCode = bundle.getString("UserDiseCode");
-        userMobileNumber = bundle.getString("UserMobileNumber");
-        userOtp = bundle.getString("UserOtp");
-        finish();
-        
-        Toast.makeText(getApplicationContext(), userDiseCode + "\n" + userMobileNumber + "\n" + userOtp, Toast.LENGTH_SHORT).show();
+//        Intent intent = getIntent();
+//        userDiseCode = intent.getStringExtra("UserDiseCode");
+//        userMobileNumber = intent.getStringExtra("UserMobileNumber");
+//        userOtp = intent.getStringExtra("UserOtp");
+//        finish();
+//
+//        Toast.makeText(getApplicationContext(), userDiseCode + "\n" + userMobileNumber + "\n" + userOtp, Toast.LENGTH_SHORT).show();
 
         SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
+
         userDiseCode = sharedPreferences.getString("UserDiseCode", "");
         diseCode = findViewById(R.id.user_dise);
         diseCode.setText("Dise Code: " + userDiseCode);
-        String UserMobileNumber = sharedPreferences.getString("UserMobileNumber", "");
+
+        userMobileNumber = sharedPreferences.getString("UserMobileNumber", "");
         mobileNo = findViewById(R.id.total_students_mid_day_meal);
         mobileNo.setText("Mobile No: " + userMobileNumber);
-        String UserOtp = sharedPreferences.getString("UserOtp", "");
+
+        userOtp = sharedPreferences.getString("UserOtp", "");
         otp = findViewById(R.id.total_students);
         otp.setText("OTP: " + userOtp);
 

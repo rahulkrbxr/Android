@@ -70,20 +70,27 @@ public class login extends AppCompatActivity {
         //  String isValied = "yes";
         View focusView = null;
 
-        if (TextUtils.isEmpty(editTextDiseCode.getText().toString())) {
-            editTextDiseCode.setError("Enter Dise Code");
-            focusView = editTextDiseCode;
-            cancelRegistration = true;
-        } else if (TextUtils.isEmpty(editTextMobileNumber.getText().toString())) {
-            editTextMobileNumber.setError("Enter Mobile No");
-            focusView = editTextMobileNumber;
-            cancelRegistration = true;
-        } else if (editTextOtp.getText().length() < 4) {
-            editTextOtp.setError("Enter Valid OTP");
-            focusView = editTextOtp;
-            cancelRegistration = true;
-        }
+//        if (userDetails.getLoginStatus().equals("1-Login Successfully"))
+//        {
+//            editTextDiseCode.setText(userDiseCode);
+//            editTextMobileNumber.setText(userMobileNumber);
+//            editTextMobileNumber.setText(userOtp);
+//        } else {
 
+            if (TextUtils.isEmpty(editTextDiseCode.getText().toString())) {
+                editTextDiseCode.setError("Enter Dise Code");
+                focusView = editTextDiseCode;
+                cancelRegistration = true;
+            } else if (TextUtils.isEmpty(editTextMobileNumber.getText().toString())) {
+                editTextMobileNumber.setError("Enter Mobile No");
+                focusView = editTextMobileNumber;
+                cancelRegistration = true;
+            } else if (editTextOtp.getText().length() < 4) {
+                editTextOtp.setError("Enter Valid OTP");
+                focusView = editTextOtp;
+                cancelRegistration = true;
+            }
+//        }
 
         if (cancelRegistration) {
             // error in login
@@ -122,7 +129,9 @@ public class login extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String res= WebServiceHelper.AuthenticatMethod(userDiseCode, userMobileNumber, userOtp);
 
-             return res;
+            userDetails.setLoginStatus(res);
+
+            return res;
         }
 
         @Override
@@ -152,12 +161,13 @@ public class login extends AppCompatActivity {
 //                userOtp = sharedpreferences.getString("UserOtp", "");
 
                 Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
+
                 // condition to check if credential are correct
                 if(result.equals("1-Login Successfully ")) {
                     Intent i = new Intent(login.this, MainActivity.class);
-                    i.putExtra("UserDiseCode", userDiseCode);
-                    i.putExtra("UserMobileNumber", userMobileNumber);
-                    i.putExtra("UserOtp", userOtp);
+//                    i.putExtra("UserDiseCode", userDiseCode);
+//                    i.putExtra("UserMobileNumber", userMobileNumber);
+//                    i.putExtra("UserOtp", userOtp);
                     startActivity(i);
                 } else {
                     userDiseCode = "";
