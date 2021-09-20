@@ -36,6 +36,5 @@ public class StudentDetails extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, country);
 
         listViewStudents.setAdapter(arrayAdapter);
-
     }
 }
