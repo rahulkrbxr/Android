@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView diseCode;
     TextView mobileNo;
     TextView otp;
+    UserDetails userDetails;
     DataBaseHelper localDB;
     SQLiteDatabase db;
     DataBaseHelper databaseHelper;
@@ -94,14 +95,14 @@ public class MainActivity extends AppCompatActivity {
         lin_studentdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, StudentDetails.class);
-                i.putExtra("UserDiseCode", userDiseCode);
-                startActivity(i);
+//                Intent i = new Intent(MainActivity.this, StudentDetails.class);
+//                i.putExtra("UserDiseCode", userDiseCode);
+//                startActivity(i);
 
                 if(userDiseCode.equals(""))
                     Toast.makeText(getApplicationContext(), "Dise Code not available", Toast.LENGTH_LONG).show();
-//                else
-//                    new MarkAttendance().execute();
+                else
+                    new StudentList().execute();
             }
         });
     }
@@ -129,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected ArrayList<StudentInfo> doInBackground(String... strings) {
+            // shared preference not working
+            // So, used UserDetails class getDiseCod() method to get dise code
             return WebServiceHelper.GetStudentList(userDiseCode);
         }
 
@@ -138,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("Student list :" ,""+pvmArrayList.size());
             Toast.makeText(getApplicationContext(), "No of students: " + pvmArrayList.size(), Toast.LENGTH_SHORT).show();
+
+//            Intent intent = new Intent(MainActivity.this, StudentDetails.class);
+//            startActivity(intent);
+
         }
     }
 }

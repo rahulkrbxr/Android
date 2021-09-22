@@ -147,7 +147,7 @@ public class login extends AppCompatActivity {
                     editor.putString("UserDiseCode", userDiseCode);
                     editor.putString("UserMobileNumber", userMobileNumber);
                     editor.putString("UserOtp", userOtp);
-                    editor.apply();
+                    editor.commit();
                 }
 
 
