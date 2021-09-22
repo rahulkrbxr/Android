@@ -28,7 +28,6 @@ public class login extends AppCompatActivity {
     private String userDiseCode="";
     private String userMobileNumber="";
     private String userOtp="";
-
     SharedPreferences sharedpreferences;
 //    SharedPreferences sharedpreferences = getSharedPreferences("com.example.rahulmedhasoft", Context.MODE_PRIVATE);
 //    public static final String MyPREFERENCES = "MyPrefs";
@@ -141,13 +140,16 @@ public class login extends AppCompatActivity {
             {
                 // when input details is verified saved the details to
                 // userDiseCode, userMobileNumber, userOtp
-                sharedpreferences = getSharedPreferences("com.example.rahulmedhasoft", Context.MODE_PRIVATE);
+                sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
-                editor.putString("UserDiseCode", userDiseCode);
-                editor.putString("UserMobileNumber", userMobileNumber);
-                editor.putString("UserOtp", userOtp);
-                editor.apply();
+                if (sharedpreferences == null) {
+                    editor.putString("UserDiseCode", userDiseCode);
+                    editor.putString("UserMobileNumber", userMobileNumber);
+                    editor.putString("UserOtp", userOtp);
+                    editor.apply();
+                }
+
 
                 // verified user credentials
                 // saving details on string varible
@@ -156,23 +158,24 @@ public class login extends AppCompatActivity {
                 userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
                 userOtp = sharedpreferences.getString("UserOtp", "");
 
-//                userDiseCode = sharedpreferences.getString("UserDiseCode", "");
-//                userMobileNumber = sharedpreferences.getString("UserMobileNumber", "");
-//                userOtp = sharedpreferences.getString("UserOtp", "");
-
                 Toast.makeText(login.this, result, Toast.LENGTH_SHORT).show();
 
                 // condition to check if credential are correct
                 if(result.equals("1-Login Successfully ")) {
+//                    UserDetails ud = new UserDetails();
+//                    ud.setLoginStatus(result);
+//                    ud.setDiseCode(userDiseCode);
+//                    ud.setMobileNo(userMobileNumber);
+//                    ud.setOtp(userOtp);
                     Intent i = new Intent(login.this, MainActivity.class);
 //                    i.putExtra("UserDiseCode", userDiseCode);
 //                    i.putExtra("UserMobileNumber", userMobileNumber);
 //                    i.putExtra("UserOtp", userOtp);
                     startActivity(i);
                 } else {
-                    userDiseCode = "";
-                    userMobileNumber = "";
-                    userOtp = "";
+//                    userDiseCode = "";
+//                    userMobileNumber = "";
+//                    userOtp = "";
                     Toast.makeText(login.this, "Authentication Failed\nWrong credentials", Toast.LENGTH_SHORT).show();
                 }
 

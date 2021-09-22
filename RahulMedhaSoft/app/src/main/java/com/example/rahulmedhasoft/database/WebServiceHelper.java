@@ -106,9 +106,7 @@ public class WebServiceHelper {
                     return pvmArrayList;
             }
         }
-
         return pvmArrayList;
     }
-
 }
 
