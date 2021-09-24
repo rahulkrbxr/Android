@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
                     long i = helper.setStudentDetails(result);
 
                     if (i > 0) {
-                        if (progressDialog.isShowing()) {
-                            progressDialog.dismiss();
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
                         }
                         AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
                         ab.setCancelable(false);
