@@ -70,7 +70,7 @@ public class WebServiceHelper {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GetStudentList);
 
-        request.addProperty("DiseCode", disecode);
+        request.addProperty("disecode", disecode);
 
         SoapObject res1;
         try {

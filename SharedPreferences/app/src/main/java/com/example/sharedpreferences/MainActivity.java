@@ -20,36 +20,32 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.sharedpreferences", Context.MODE_PRIVATE);
 //        sharedPreferences.edit().putString("username", "Rahul").apply();
-
+//
 //        String uname = sharedPreferences.getString("username", "");
-
+//
 //        Log.i("Hello, ", uname);
 
-        /*
+
         ArrayList<String> friends = new ArrayList<>();
         friends.add("Ganesha");
         friends.add("Shiva");
         friends.add("Krishna");
         friends.add("Hanumana");
 
-        try {
-            sharedPreferences.edit().putString("friends", ObjectSerializer.serialize(friends)).apply();
+//        try {
+//            sharedPreferences.edit().putString("friends", ObjectSerializer.serialize(friends)).apply();
+//            Log.i("friends", ObjectSerializer.serialize(friends));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-            Log.i("friends", ObjectSerializer.serialize(friends));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
 
         ArrayList<String> newFriends = new ArrayList<>();
-
         try {
             newFriends = (ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences.getString("friends", ObjectSerializer.serialize(new ArrayList<String>())));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         Log.i("new Friends", newFriends.toString());
-
     }
 }

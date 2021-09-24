@@ -49,7 +49,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                login();
+               login();
                 //abhinavkumar9315@gmail.com
                 //http://localhost:58639/WebServiceAPI.asmx?op=Schoollogin
 
@@ -91,17 +91,17 @@ public class login extends AppCompatActivity {
             }
 //        }
 
-        if (cancelRegistration) {
-            // error in login
-            focusView.requestFocus();
-        } else {
+//        if (cancelRegistration) {
+//            // error in login
+//            focusView.requestFocus();
+//        } else {
             userDetails = new UserDetails();
             userDetails.setDiseCode(userDiseCode);
             userDetails.setMobileNo(userMobileNumber);
             userDetails.setOtp(userOtp);
             // new RegistrationTask().execute(userDetails);
             new Login().execute();
-        }
+        //}
     }
 
     private class Login extends AsyncTask<String, Void, String> {
@@ -126,7 +126,8 @@ public class login extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String res= WebServiceHelper.AuthenticatMethod(userDiseCode, userMobileNumber, userOtp);
+            //String res= WebServiceHelper.AuthenticatMethod(userDiseCode, userMobileNumber, userOtp);
+            String res= WebServiceHelper.AuthenticatMethod("10130507504", "7004978930", "8501");
 
             userDetails.setLoginStatus(res);
 
@@ -144,9 +145,12 @@ public class login extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
                 if (sharedpreferences == null) {
-                    editor.putString("UserDiseCode", userDiseCode);
-                    editor.putString("UserMobileNumber", userMobileNumber);
-                    editor.putString("UserOtp", userOtp);
+                    //editor.putString("UserDiseCode", userDiseCode);
+                    editor.putString("UserDiseCode", "10130507504");
+                    //editor.putString("UserMobileNumber", userMobileNumber);
+                    editor.putString("UserMobileNumber", "7004978930");
+                    //editor.putString("UserOtp", userOtp);
+                    editor.putString("UserOtp", "8501");
                     editor.commit();
                 }
 

@@ -2,9 +2,13 @@ package com.example.rahulmedhasoft;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +23,7 @@ import com.example.rahulmedhasoft.database.WebServiceHelper;
 import com.example.rahulmedhasoft.entity.StudentInfo;
 import com.example.rahulmedhasoft.entity.UserDetails;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -35,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     DataBaseHelper databaseHelper;
     DataBaseHelper dataBaseHelper;
-
+    public static ProgressDialog progressDialog;
+    DataBaseHelper placeData;
     private String userDiseCode="";
     private String userMobileNumber="";
     private String userOtp="";
@@ -44,6 +50,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        placeData=new DataBaseHelper(MainActivity.this);
+        try {
+            placeData.createDataBase();
+
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+
+        }
+
+        try {
+
+            placeData.openDataBase();
+
+        } catch (SQLException sqle) {
+
+            throw sqle;
+
+
+        }
 
 //         success in retrieving data from login.java
 //        Intent intent = getIntent();
@@ -99,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
 //                i.putExtra("UserDiseCode", userDiseCode);
 //                startActivity(i);
 
-                if(userDiseCode.equals(""))
-                    Toast.makeText(getApplicationContext(), "Dise Code not available", Toast.LENGTH_LONG).show();
-                else
+//                if(userDiseCode.equals(""))
+//                    Toast.makeText(getApplicationContext(), "Dise Code not available", Toast.LENGTH_LONG).show();
+//                else
                     new StudentList().execute();
             }
         });
@@ -132,19 +159,132 @@ public class MainActivity extends AppCompatActivity {
         protected ArrayList<StudentInfo> doInBackground(String... strings) {
             // shared preference not working
             // So, used UserDetails class getDiseCod() method to get dise code
-            return WebServiceHelper.GetStudentList(userDiseCode);
+           // return WebServiceHelper.GetStudentList(userDiseCode);
+            return WebServiceHelper.GetStudentList("10130507504");
         }
 
         @Override
-        protected void onPostExecute(ArrayList<StudentInfo> pvmArrayList) {
-            super.onPostExecute(pvmArrayList);
-
-            Log.d("Student list :" ,""+pvmArrayList.size());
-            Toast.makeText(getApplicationContext(), "No of students: " + pvmArrayList.size(), Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(ArrayList<StudentInfo> result) {
+            super.onPostExecute(result);
 
 //            Intent intent = new Intent(MainActivity.this, StudentDetails.class);
 //            startActivity(intent);
+            if (result != null) {
+                if (result.size() > 0) {
 
+                    Log.d("result.size", "" + result.size());
+                    final String totalres = "" + result.size();
+                    Toast.makeText(getApplicationContext(), totalres, Toast.LENGTH_SHORT).show();
+                    DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
+
+                    long i = helper.setStudentDetails(result);
+
+                    if (i > 0) {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                        AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+                        ab.setCancelable(false);
+                        ab.setIcon(R.drawable.download);
+
+                        ab.setTitle("DOWNLOAD SUCCESS");
+                        ab.setMessage(result.size() + " Student Details Downloaded Successfully.");
+                        Dialog dialog = new Dialog(MainActivity.this);
+                        dialog.setCanceledOnTouchOutside(false);
+                        ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                    txtTStd.setText(totalres);
+//                                    txtTotalStudents.setText("Total Student : " + totalres);
+
+//                                resetValueS();
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        ab.show();
+
+
+                    } else {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                        AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+                        ab.setCancelable(false);
+                        ab.setIcon(R.drawable.download);
+
+                        ab.setTitle("DOWNLOAD FAIL");
+                        ab.setMessage(" No Student Details Downloaded for DISE CODE: " + diseCode);
+                        Dialog dialog = new Dialog(MainActivity.this);
+                        dialog.setCanceledOnTouchOutside(false);
+                        ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+
+                                dialog.cancel();
+
+                            }
+                        });
+
+                        ab.show();
+
+
+                    }
+
+                } else {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                    AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+                    ab.setCancelable(false);
+                    ab.setIcon(R.drawable.download);
+
+                    ab.setTitle("DOWNLOAD FAIL");
+                    ab.setMessage(" No Student Details Downloaded for DISE CODE: " + diseCode);
+                    Dialog dialog = new Dialog(MainActivity.this);
+                    dialog.setCanceledOnTouchOutside(false);
+                    ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ab.show();
+                }
+            } else {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                Toast.makeText(getApplicationContext(), "Response NULL.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
+//    public void resetValueS() {
+//        DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
+//        countstd = helper.getStudentCountForUploading();
+//        countattstd = helper.getStudentCountForAttendanceUploading();
+//        countnew = helper.getStudentCountNew();
+//        countMatched = helper.getStudentCountForMatchedByBank();
+//        countNotMatchedBank = helper.getStudentCountForNotMatchedByBank();
+//        countRejected = helper.getRejectedStudentCount();
+//        countPFMS = helper.getStudentCountPFMSPending();
+////        txtCount3.setText(String.valueOf(countattstd));
+////        txtCount4.setText(String.valueOf(countattstd));
+//        tv_newCount.setText(String.valueOf(countnew));
+//        tv_Count2.setText(String.valueOf(countMatched));
+//        tv_Count3.setText(String.valueOf(countPFMS));
+//        tv_Count4.setText(String.valueOf(countNotMatchedBank));
+//        tv_Count5.setText(String.valueOf(countRejected));
+//
+//        //long totalstd=helper.getTOTALStudentCount(_diseCode);
+//        long totalstd = helper.getTOTALStudentCount();
+//        long totalstdMDM = helper.getTOTALStudentCountMDM();
+//
+//        total_stud.setText("Total Student : " + totalstd);
+//        total_stud_mid_day_meal.setText("Total Student(MID Day Meal) : " + totalstdMDM);
+//
+//        // txtTStd.setText(""+totalstd);
+//    }
 }

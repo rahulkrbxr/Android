@@ -22,7 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_PATH = "";
 
-    private static String DB_NAME = "LOCDB";
+    private static String DB_NAME = "LOCDB.db";
 
 
     @Override
@@ -179,13 +179,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             try {
                 for (int i = 0; i < info.size(); i++) {
                     values.put("ResultStatusMesg", info.get(i).getResultStatusMesg());
-                    values.put("a_ID", info.get(i).getA_Id());
+                    values.put("a_Id", info.get(i).getA_Id());
                     values.put("BeneficieryId", info.get(i).getBeneficieryId());
                     values.put("DiseCode", info.get(i).getDiseCode());
-                    values.put("ClassID", info.get(i).getClassId());
+                    values.put("ClassId", info.get(i).getClassId());
                     values.put("BeneficieryName", info.get(i).getBeneficieryName());
                     values.put("FHName", info.get(i).getFHName());
-                    values.put("MHName", info.get(i).getMName());
+                    values.put("MName", info.get(i).getMName());
                     values.put("Gender", info.get(i).getGender());
                     values.put("DOB", info.get(i).getDOB());
                     values.put("BenAccountNo", info.get(i).getBenAccountNo());
