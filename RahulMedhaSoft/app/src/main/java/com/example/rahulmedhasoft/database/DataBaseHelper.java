@@ -2,12 +2,15 @@ package com.example.rahulmedhasoft.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.ArrayRes;
 
 import com.example.rahulmedhasoft.entity.StudentInfo;
 
@@ -17,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -229,5 +233,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 Log.e("log_tag", "Error safeCloseDB" );
             }
         }
+    }
+
+    // Get Student Details
+    public ArrayList<ArrayList<String>> getStudentDetails() {
+        SQLiteDatabase  db = this.getWritableDatabase();
+        ArrayList<ArrayList<String>> studentList = new ArrayList<>();
+        String query = "SELECT ResultStatusMesg, a_Id, BeneficieryId, DiseCode, ClassId, BeneficieryName, FHName, MName, Gender, DOB, BenAccountNo, IFSCCode, eupi_BenNameasPerBank, maxscore FROM" + "StudentDetails";
+
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            ArrayList<String> student = new ArrayList<>();
+            student.add(cursor.getString(cursor.getColumnIndex("ResultStatusMesg")));
+            student.add(cursor.getString(cursor.getColumnIndex("a_Id")));
+            student.add(cursor.getString(cursor.getColumnIndex("BeneficieryId")));
+            student.add(cursor.getString(cursor.getColumnIndex("DiseCode")));
+            student.add(cursor.getString(cursor.getColumnIndex("ClassId")));
+            student.add(cursor.getString(cursor.getColumnIndex("BeneficieryName")));
+            student.add(cursor.getString(cursor.getColumnIndex("FHName")));
+            student.add(cursor.getString(cursor.getColumnIndex("MName")));
+            student.add(cursor.getString(cursor.getColumnIndex("Gender")));
+            student.add(cursor.getString(cursor.getColumnIndex("DOB")));
+            student.add(cursor.getString(cursor.getColumnIndex("BenAccountNo")));
+            student.add(cursor.getString(cursor.getColumnIndex("IFSCCode")));
+            student.add(cursor.getString(cursor.getColumnIndex("eupi_BenNameasPerBank")));
+            student.add(cursor.getString(cursor.getColumnIndex("maxscore")));
+            studentList.add(student);
+        }
+        return studentList;
     }
 }

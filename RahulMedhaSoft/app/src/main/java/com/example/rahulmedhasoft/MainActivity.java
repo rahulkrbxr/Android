@@ -199,6 +199,9 @@ public class MainActivity extends AppCompatActivity {
 
 //                                resetValueS();
                                 dialog.dismiss();
+                                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+
+                                startActivity(intent);
 
                             }
                         });

@@ -31,7 +31,6 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(DetailsActivity.this, MainActivity.class);
-
                 startActivity(intent);
             }
         });
