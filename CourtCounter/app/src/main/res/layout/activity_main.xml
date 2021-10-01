@@ -69,9 +69,8 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="16dp">
-        </View>
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"></View>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -86,7 +85,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
                 android:padding="4dp"
-                android:text="Team A"
+                android:text="Team B"
                 android:textColor="#616161"
                 android:textSize="14sp" />
 
@@ -134,8 +133,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginBottom="8dp"
         android:onClick="resetScore"
-        android:text="Reset"
-        android:layout_marginBottom="32dp"/>
+        android:text="Reset" />
 
 </RelativeLayout>
