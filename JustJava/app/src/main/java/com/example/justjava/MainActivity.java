@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 
 /**
- * This app displays an order form to order coffee.
+ * This app display order summary for coffee ordered
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -34,40 +34,71 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
      * This method is called when order button is clicked
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMessage = "Total: $" + price;
-        priceMessage = priceMessage + "\nThank you!";
+        int price = calculatePrice(quantity, 5);
+        String priceMessage = createOrderSummary(price);
         displayMessage(priceMessage);
     }
 
     /**
-     * This method displays the given quantity value on the screen.
+     * This method displayQuantitys the given quantity value on the screen.
+     *
+     * @param numberOfCoffees ordered
      */
-    private void display(int number) {
+    private void displayQuantity(int numberOfCoffees) {
         TextView quantityTextView = findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + numberOfCoffees);
     }
 
     /**
-     * This method displays the given quantity value on the screen
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
-    /**
-     * This method displays the given text on the screen
+     * This method displayQuantitys the given text on the screen
+     *
+     * @param message, as no of quantity
      */
     private void displayMessage(String message) {
-        TextView priceTextView = findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
+    }
+
+    /**
+     * This method calculates the price of total coffee purchased.
+     *
+     * @param quantity of coffee
+     * @return int price
+     */
+    private int calculatePrice(int quantity, int pricePerCup) {
+        int price = quantity * 5;
+        return price;
+    }
+
+    /**
+     * Creates summary of the order
+     *
+     * @param price of the order
+     * @return text summary
+     */
+    private String createOrderSummary(int price) {
+        String priceMessage = "Name: Rahul Kumar\n";
+        priceMessage += "Quantity: " + quantity;
+        priceMessage += "\nTotal: $" + price;
+        priceMessage = priceMessage + "\nThank you!";
+        return priceMessage;
+    }
+
+    /**
+     * Creates a custom greeting message based on the name
+     *
+     * @param firstName
+     * @param lastName
+     * @return text greeting
+     */
+    private String createCustomGreeting(String firstName, String lastName) {
+        return ("Welcome " + firstName + " " + lastName + "!");
     }
 }

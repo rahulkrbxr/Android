@@ -236,30 +236,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Get Student Details
-    public ArrayList<ArrayList<String>> getStudentDetails() {
+    public ArrayList<StudentInfo> getStudentDetails() {
         SQLiteDatabase  db = this.getWritableDatabase();
-        ArrayList<ArrayList<String>> studentList = new ArrayList<>();
+        ArrayList<StudentInfo> stdDataEntities = new ArrayList<StudentInfo>();
         String query = "SELECT ResultStatusMesg, a_Id, BeneficieryId, DiseCode, ClassId, BeneficieryName, FHName, MName, Gender, DOB, BenAccountNo, IFSCCode, eupi_BenNameasPerBank, maxscore FROM" + "StudentDetails";
 
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            ArrayList<String> student = new ArrayList<>();
-            student.add(cursor.getString(cursor.getColumnIndex("ResultStatusMesg")));
-            student.add(cursor.getString(cursor.getColumnIndex("a_Id")));
-            student.add(cursor.getString(cursor.getColumnIndex("BeneficieryId")));
-            student.add(cursor.getString(cursor.getColumnIndex("DiseCode")));
-            student.add(cursor.getString(cursor.getColumnIndex("ClassId")));
-            student.add(cursor.getString(cursor.getColumnIndex("BeneficieryName")));
-            student.add(cursor.getString(cursor.getColumnIndex("FHName")));
-            student.add(cursor.getString(cursor.getColumnIndex("MName")));
-            student.add(cursor.getString(cursor.getColumnIndex("Gender")));
-            student.add(cursor.getString(cursor.getColumnIndex("DOB")));
-            student.add(cursor.getString(cursor.getColumnIndex("BenAccountNo")));
-            student.add(cursor.getString(cursor.getColumnIndex("IFSCCode")));
-            student.add(cursor.getString(cursor.getColumnIndex("eupi_BenNameasPerBank")));
-            student.add(cursor.getString(cursor.getColumnIndex("maxscore")));
-            studentList.add(student);
+           StudentInfo student = new StudentInfo();
+            student.setBeneficieryId((cursor.getString(cursor.getColumnIndex("BeneficieryId"))));
+/**
+ * add morew details
+ */
+            stdDataEntities.add(student);
         }
-        return studentList;
+        return stdDataEntities;
     }
 }
