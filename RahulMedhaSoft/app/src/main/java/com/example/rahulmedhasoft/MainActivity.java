@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                                resetValueS();
                                 dialog.dismiss();
-                                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                                Intent intent = new Intent(MainActivity.this, DetailsAdaptor.class);
 
                                 startActivity(intent);
 

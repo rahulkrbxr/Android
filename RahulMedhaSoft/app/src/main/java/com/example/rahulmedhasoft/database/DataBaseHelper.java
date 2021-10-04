@@ -237,18 +237,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // Get Student Details
     public ArrayList<StudentInfo> getStudentDetails() {
-        SQLiteDatabase  db = this.getWritableDatabase();
         ArrayList<StudentInfo> stdDataEntities = new ArrayList<StudentInfo>();
-        String query = "SELECT ResultStatusMesg, a_Id, BeneficieryId, DiseCode, ClassId, BeneficieryName, FHName, MName, Gender, DOB, BenAccountNo, IFSCCode, eupi_BenNameasPerBank, maxscore FROM" + "StudentDetails";
+        Cursor cursor = null;
+        SQLiteDatabase  sqLiteDatabase = this.getWritableDatabase();
+//        String SQLQ = "SELECT ResultStatusMesg, a_Id, BeneficieryId, DiseCode, ClassId, BeneficieryName, FHName, MName, Gender, DOB, BenAccountNo, IFSCCode, eupi_BenNameasPerBank, maxscore FROM" + "StudentDetails";
 
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext()) {
-           StudentInfo student = new StudentInfo();
-            student.setBeneficieryId((cursor.getString(cursor.getColumnIndex("BeneficieryId"))));
-/**
- * add morew details
- */
-            stdDataEntities.add(student);
+        try {
+
+            String SQLQ = "SELECT BeneficieryName, FHName, MName FROM StudentDetails";
+
+            cursor = sqLiteDatabase.rawQuery(SQLQ, null);
+
+            int x = cursor.getCount();
+
+            while (cursor.moveToNext()) {
+                StudentInfo student = new StudentInfo();
+                student.setBeneficieryName((cursor.getString(cursor.getColumnIndex("BeneficieryName"))));
+                student.setFHName(cursor.getString(cursor.getColumnIndex("FHName")));
+                student.setMName(cursor.getString(cursor.getColumnIndex("MName")));
+                /**
+                 * add morew details
+                 */
+                stdDataEntities.add(student);
+            }
+            this.getReadableDatabase().close();
+            cursor.close();
+            sqLiteDatabase.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return stdDataEntities;
     }

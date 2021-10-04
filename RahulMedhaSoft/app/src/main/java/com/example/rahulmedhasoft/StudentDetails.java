@@ -25,7 +25,7 @@ public class StudentDetails extends AppCompatActivity {
 //        finish();
 //        Toast.makeText(getApplicationContext(), "DiseCode: " + diseCode, Toast.LENGTH_SHORT).show();
 
-        ListView listViewStudents = findViewById(R.id.listViewStudents);
+        ListView listViewStudents = findViewById(R.id.listViewStudentsDetails);
 
         ArrayList<String> country = new ArrayList<>();
         country.add("India");

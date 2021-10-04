@@ -32,9 +32,10 @@
         tools:layout_editor_absoluteX="16dp">
 
         <ListView
-            android:id="@+id/listViewStudents"
+            android:id="@+id/listViewStudentsDetails"
             android:layout_width="match_parent"
-            android:layout_height="600dp" />
+            android:layout_height="700dp"
+            android:background="@color/medha_skyBlue"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,6 +44,5 @@
             android:textSize="24sp"
             android:layout_gravity="center"/>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
