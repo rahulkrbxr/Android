@@ -24,7 +24,6 @@ import java.util.HashMap;
 //        ListView lv = findViewById(R.id.listViewStudents);
 //        ListAdapter adapter = new SimpleAdapter(DetailsAdaptor.this, studentList, R.layout.list_row, new String[]{"BeneficieryName"}, new int[]{R.id.studentName});
 //        lv.setAdapter(adapter);
-
 //    }
 
 
@@ -45,7 +44,7 @@ public class DetailsAdaptor extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return data.size();
     }
 
     @Override
@@ -89,7 +88,7 @@ public class DetailsAdaptor extends BaseAdapter {
                 holder.motherName.setText(motherName);
             }
         }
-
+        notifyDataSetChanged();
         return view;
     }
 

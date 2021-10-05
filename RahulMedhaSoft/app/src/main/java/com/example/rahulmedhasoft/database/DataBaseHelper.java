@@ -255,8 +255,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 student.setBeneficieryName((cursor.getString(cursor.getColumnIndex("BeneficieryName"))));
                 student.setFHName(cursor.getString(cursor.getColumnIndex("FHName")));
                 student.setMName(cursor.getString(cursor.getColumnIndex("MName")));
+
                 /**
-                 * add morew details
+                 * add more details
                  */
                 stdDataEntities.add(student);
             }

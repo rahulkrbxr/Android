@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout lin_logout;
     LinearLayout lin_home;
     LinearLayout lin_studentdetails;
+    LinearLayout lin_viewstudentdetails;
     TextView diseCode;
     TextView mobileNo;
     TextView otp;
@@ -132,6 +133,16 @@ public class MainActivity extends AppCompatActivity {
                     new StudentList().execute();
             }
         });
+
+        lin_viewstudentdetails = findViewById(R.id.lin_viewstudentdetails);
+        lin_viewstudentdetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AttendanceListActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -199,9 +210,9 @@ public class MainActivity extends AppCompatActivity {
 
 //                                resetValueS();
                                 dialog.dismiss();
-                                Intent intent = new Intent(MainActivity.this, DetailsAdaptor.class);
-
-                                startActivity(intent);
+//                                Intent intent = new Intent(MainActivity.this, DetailsAdaptor.class);
+//
+//                                startActivity(intent);
 
                             }
                         });
