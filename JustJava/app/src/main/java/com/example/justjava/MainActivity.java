@@ -2,9 +2,14 @@ package com.example.justjava;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -15,6 +20,7 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +44,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method is called when order button is clicked
+     * This method hide the keyboard when order button is clicked
      */
     public void submitOrder(View view) {
+        CheckBox whippedCream = findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCream.isChecked();
+        CheckBox chocolate = findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolate.isChecked();
+        EditText name = findViewById(R.id.name_text_input);
+        String nameTextInput = name.getText().toString();
+        closeKeyboard(view);
         int price = calculatePrice(quantity, 5);
-        String priceMessage = createOrderSummary(price);
+        String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate, nameTextInput);
         displayMessage(priceMessage);
+    }
+
+    /**
+     * This method close keyboard when order button is pressed
+     */
+    private void closeKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     /**
@@ -81,11 +102,16 @@ public class MainActivity extends AppCompatActivity {
      * Creates summary of the order
      *
      * @param price of the order
+     * @param addWhippedCream is whether or not the user wants whipped cream topping
+     * @param addChocolate is whether or not the user wants chocolate topping
+     * @param name of the person
      * @return text summary
      */
-    private String createOrderSummary(int price) {
-        String priceMessage = "Name: Rahul Kumar\n";
-        priceMessage += "Quantity: " + quantity;
+    private String createOrderSummary(int price, boolean addWhippedCream , boolean addChocolate, String name) {
+        String priceMessage = "Name: " + name;
+        priceMessage += "\nAdd whipped cream? " + addWhippedCream ;
+        priceMessage += "\nAdd chocolate? " + addChocolate ;
+        priceMessage += "\nQuantity: " + quantity;
         priceMessage += "\nTotal: $" + price;
         priceMessage = priceMessage + "\nThank you!";
         return priceMessage;
