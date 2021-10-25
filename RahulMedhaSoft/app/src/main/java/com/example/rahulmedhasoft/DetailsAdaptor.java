@@ -77,15 +77,15 @@ public class DetailsAdaptor extends BaseAdapter {
             StudentInfo country = data.get(i);
             String studentName = country.getBeneficieryName();
             if (studentName != null) {
-                holder.studentName.setText(studentName);
+                holder.studentName.setText("Name: " + studentName);
             }
             String fatherName = country.getFHName();
             if (fatherName != null) {
-                holder.fatherName.setText(fatherName);
+                holder.fatherName.setText("FName: " + fatherName);
             }
             String motherName = country.getMName();
             if (motherName != null) {
-                holder.motherName.setText(motherName);
+                holder.motherName.setText("MName: " + motherName);
             }
         }
         notifyDataSetChanged();
