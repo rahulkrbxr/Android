@@ -8,7 +8,7 @@ import java.util.Hashtable;
 public class UserDetails implements KvmSerializable {
 
     private String LoginStatus = "";
-    private String DiseCode = "";
+    private String DiseCode ="";
     private String MobileNo = "";
     private String Otp = "";
 

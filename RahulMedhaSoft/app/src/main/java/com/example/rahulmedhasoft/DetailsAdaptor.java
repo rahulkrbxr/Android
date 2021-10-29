@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.rahulmedhasoft.entity.StudentInfo;
@@ -69,7 +71,16 @@ public class DetailsAdaptor extends BaseAdapter {
         holder.fatherName = view.findViewById(R.id.fatherName);
         holder.motherName = view.findViewById(R.id.motherName);
 
+        holder.radioattn = view.findViewById(R.id.radioattn);
+        holder.radio_Y_attn = view.findViewById(R.id.radio_yes);
+        holder.radio_N_attn = view.findViewById(R.id.radio_no);
+
         view.setTag(holder);
+
+        holder.radioattn.setFocusable(false);
+        holder.radio_Y_attn.setFocusable(false);
+        holder.radio_N_attn.setFocusable(false);
+
         countChecked = 0;
         int pos = i+1;
 
@@ -96,5 +107,7 @@ public class DetailsAdaptor extends BaseAdapter {
     {
         TextView studentName, fatherName, motherName;
         LinearLayout list_row_detail;
+        RadioGroup radioattn;
+        RadioButton radio_Y_attn, radio_N_attn;
     }
 }

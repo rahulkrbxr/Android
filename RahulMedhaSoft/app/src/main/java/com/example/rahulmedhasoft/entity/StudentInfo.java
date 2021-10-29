@@ -25,6 +25,15 @@ public class StudentInfo extends ArrayList<StudentInfo> implements KvmSerializab
     private String IFSCCode = "";
     private String eupi_BenNameasPerBank = "";
     private String maxscore = "";
+    private String Attendance = "";
+
+    public String getAttendance() {
+        return Attendance;
+    }
+
+    public void setAttendance(String attendance) {
+        Attendance = attendance;
+    }
 
     public StudentInfo() {}
 
@@ -43,6 +52,7 @@ public class StudentInfo extends ArrayList<StudentInfo> implements KvmSerializab
         this.setIFSCCode(obj.getProperty("IFSCCode").toString());
         this.setEupi_BenNameasPerBank(obj.getProperty("eupi_BenNameasPerBank").toString());
         this.setMaxscore(obj.getProperty("maxscore").toString());
+        this.setAttendance(obj.getProperty("Attendance").toString());
     }
 
     public String getResultStatusMesg() {

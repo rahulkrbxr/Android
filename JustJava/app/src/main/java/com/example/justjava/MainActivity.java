@@ -3,7 +3,10 @@ package com.example.justjava;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -11,7 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.net.URI;
 import java.text.NumberFormat;
 
 /**
@@ -31,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when + button is clicked
      */
     public void increment(View view) {
+        if (quantity == 100) {
+            // Show an error message as a toast
+            Toast.makeText(getApplicationContext(), "You cannot order more than 100 Coffee", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return ;
+        }
         quantity = quantity + 1;
         displayQuantity(quantity);
     }
@@ -39,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when - button is clicked
      */
     public void decrement(View view) {
+        if (quantity == 1) {
+            // Show an error message as a toast
+            Toast.makeText(getApplicationContext(), "You cannot order less than 1 Coffee", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return ;
+        }
         quantity = quantity - 1;
         displayQuantity(quantity);
     }
@@ -54,9 +71,18 @@ public class MainActivity extends AppCompatActivity {
         EditText name = findViewById(R.id.name_text_input);
         String nameTextInput = name.getText().toString();
         closeKeyboard(view);
-        int price = calculatePrice(quantity, 5);
+        int price = calculatePrice(quantity, 5, hasWhippedCream, hasChocolate);
         String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate, nameTextInput);
-        displayMessage(priceMessage);
+
+        String subject = nameTextInput + " - Coffee Order";
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+//        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /**
@@ -78,24 +104,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method displayQuantitys the given text on the screen
-     *
-     * @param message, as no of quantity
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
-
-    /**
      * This method calculates the price of total coffee purchased.
      *
      * @param quantity of coffee
      * @return int price
      */
-    private int calculatePrice(int quantity, int pricePerCup) {
-        int price = quantity * 5;
-        return price;
+    private int calculatePrice(int quantity, int pricePerCup, boolean hasWhippedCream, boolean hasChocolate) {
+        int basePrice;
+        int rate = 5;
+        if (hasWhippedCream)
+            rate += 1;
+        if (hasChocolate)
+            rate += 2;
+        basePrice = quantity * rate;
+        return basePrice;
     }
 
     /**

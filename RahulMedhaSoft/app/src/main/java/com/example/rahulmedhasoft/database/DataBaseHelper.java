@@ -196,6 +196,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     values.put("IFSCCode", info.get(i).getIFSCCode());
                     values.put("eupi_BenNameasPerBank", info.get(i).getEupi_BenNameasPerBank());
                     values.put("maxscore", info.get(i).getMaxscore());
+                    values.put("Attendance", info.get(i).getAttendance());
 
                     c = db.insert("StudentDetails", null, values);
 
