@@ -18,14 +18,16 @@
 
     <string name="order">Order</string>
 
-    <string name="price">Price</string>
-
     <!--
         Name for the order summary. It will be shown in the format of "Name: Amy" where Amy is the name
     -->
     <string name="order_summary_name">Name: <xliff:g id="name" example="Amy">%s</xliff:g></string>
     
-    <string name="order_summary_add_whipped_cream">Add Whipped Cream: <xliff:g id="add_whipped_cream" example="False">%b</xliff:g></string>
+    <string name="order_summary_add_whipped_cream">Add Whipped Cream? <xliff:g id="add_whipped_cream" example="False">%b</xliff:g></string>
 
-    <string name="order_summary_add_chocolate">Add Chocolate: <xliff:g id="add_chocolate" example="False">%b</xliff:g></string>
+    <string name="order_summary_add_chocolate">Add Chocolate? <xliff:g id="add_chocolate" example="False">%b</xliff:g></string>
+
+    <string name="order_summary_email_subject">Just Java order for <xliff:g id="name" example="Amy">%s</xliff:g></string>
+
+    <string name="order_summary_price">Total: <xliff:g id="price" example="$10">%s</xliff:g></string>
 </resources>

@@ -4,12 +4,13 @@
     <string name="thank_you">Gracias!</string>
     <string name="toppings">Ingredientes</string>
     <string name="order_summary_name">Name: <xliff:g id="name" example="Amy">%s</xliff:g></string>
-    <string name="order_summary_add_whipped_cream">Añadir nata montada: <xliff:g id="add_whipped_cream" example="False">%b</xliff:g></string>
-    <string name="order_summary_add_chocolate">Añadir chocolate: <xliff:g id="add_chocolate" example="False">%b</xliff:g></string>
+    <string name="order_summary_add_whipped_cream">Añadir nata montada? <xliff:g id="add_whipped_cream" example="False">%b</xliff:g></string>
+    <string name="order_summary_add_chocolate">Añadir chocolate? <xliff:g id="add_chocolate" example="False">%b</xliff:g></string>
     <string name="name_hint">Name</string>
     <string name="whipped_cream">Crema batida</string>
     <string name="chocolate">Chocolate</string>
     <string name="quantity">Cantidad</string>
     <string name="order">Pedido</string>
-    <string name="price">Precio</string>
+    <string name="order_summary_email_subject">Just Java order for <xliff:g id="name" example="Amy">%s</xliff:g></string>
+    <string name="order_summary_price">Total: <xliff:g id="price" example="$10">%s</xliff:g></string>
 </resources>

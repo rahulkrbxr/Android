@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         int price = calculatePrice(quantity, 5, hasWhippedCream, hasChocolate);
         String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate, nameTextInput);
 
-        String subject = nameTextInput + " - Coffee Order";
+        String subject = getString(R.string.order_summary_email_subject, nameTextInput);
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
 //        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         priceMessage += "\n" + getString(R.string.order_summary_add_whipped_cream, addWhippedCream);
         priceMessage += "\n" + getString(R.string.order_summary_add_chocolate, addChocolate);
         priceMessage += "\n" + getString(R.string.quantity) + ": " + quantity;
-        priceMessage += "\n" + getString(R.string.price) + ": $" + price;
+        priceMessage += "\n" + getString(R.string.order_summary_price, NumberFormat.getCurrencyInstance().format(price));
         priceMessage += "\n" + getString(R.string.thank_you);
         return priceMessage;
     }
