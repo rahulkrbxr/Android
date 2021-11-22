@@ -201,9 +201,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     c = db.insert("StudentDetails", null, values);
 
                     if (c > 0) {
-                        Log.e("Data", "Inserted");
+                        Log.d("Data", "Inserted");
                     } else {
-                        Log.e("Data", "Not Inserted");
+                        Log.d("Data", "Not Inserted");
                     }
                 }
 
@@ -212,6 +212,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
             } catch (Exception e) {
                 e.printStackTrace();
+
+                Log.e("DataBaseHelper.java", "Error");
 
                 if (db != null) {
                     db.close();

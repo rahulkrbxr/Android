@@ -14,11 +14,11 @@ public class WebServiceHelper {
 
 
 //  public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
-//    public static final String SERVICENAMESPACE = "http://10.133.20.135:80/";
-public static final String SERVICENAMESPACE = "http://192.168.1.2:80/";
+    public static final String SERVICENAMESPACE = "http://10.133.20.135:80/";
+//public static final String SERVICENAMESPACE = "http://192.168.1.2:80/";
     //public static final String SERVICENAMESPACE = "http://192.168.43.191:4545/";
-//    public static final String SERVICEURL = "http://10.133.20.135:80/WebServiceAPI.asmx";
-    public static final String SERVICEURL = "http://192.168.1.2:80/WebServiceAPI.asmx";
+    public static final String SERVICEURL = "http://10.133.20.135:80/WebServiceAPI.asmx";
+//    public static final String SERVICEURL = "http://192.168.1.2:80/WebServiceAPI.asmx";
     //public static final String SERVICEURL = "http://192.168.43.191:4545/WebServiceAPI.asmx";
     //    public static final String SERVICEURL = "http://10.133.20.135:8081/WebServiceAPI.asmx";
     public static final String AuthenticateMethod = "Authenticate";
