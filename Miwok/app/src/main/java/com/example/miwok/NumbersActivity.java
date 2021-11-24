@@ -42,7 +42,8 @@ public class NumbersActivity extends AppCompatActivity {
          * list_item.xml custom layout resource defined in the Resource directory.
          * The list item layout contains a double {@link TextView}, which the adapter will display
          */
-        ArrayAdapter<Word> itemAdapter = new ArrayAdapter<>(this, R.layout.list_item, words);
+
+        WordAdapter adapter = new WordAdapter(this, words);
 
         /**
          * Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
@@ -57,7 +58,7 @@ public class NumbersActivity extends AppCompatActivity {
          * Do this by calling the setAdapter method on the {@link ListView} object and pass in
          * as parameter.
          */
-        listView.setAdapter(itemAdapter);
+        listView.setAdapter(adapter);
 
     }
 }

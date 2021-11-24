@@ -14,7 +14,7 @@
         tools:text="lutti" />
 
     <TextView
-        android:id="@+id/english_text"
+        android:id="@+id/default_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
