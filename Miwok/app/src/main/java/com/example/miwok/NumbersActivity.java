@@ -59,6 +59,5 @@ public class NumbersActivity extends AppCompatActivity {
          * as parameter.
          */
         listView.setAdapter(adapter);
-
     }
 }
