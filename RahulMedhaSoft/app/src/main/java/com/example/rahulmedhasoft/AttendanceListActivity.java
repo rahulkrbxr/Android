@@ -34,7 +34,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_details);
         listViewStudentsDetails=findViewById(R.id.listViewStudentsDetails);
 
-//        DataBaseHelper db = new DataBaseHelper(this);
+//                 DataBaseHelper db = new DataBaseHelper(this);
 //        studentList = db.getStudentDetails();
 //        ListView lv = findViewById(R.id.listViewStudentsDetails);
 //        ListAdapter adapter = new SimpleAdapter(AttendanceListActivity.this, studentList, R.layout.list_row_adaptor, new String[]{"BeneficieryName", "Father Name", "Mother Name"}, new int[]{R.id.studentName, R.id.fatherName, R.id.motherName});

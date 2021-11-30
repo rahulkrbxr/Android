@@ -237,7 +237,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Student Details"
+                                    android:text="Download Student Details"
                                     android:textColor="#0B6DA7"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -315,7 +315,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Mark MID DAY MEAL"
+                                    android:text="Download MID DAY MEAL"
                                     android:textColor="#0B6DA7"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />

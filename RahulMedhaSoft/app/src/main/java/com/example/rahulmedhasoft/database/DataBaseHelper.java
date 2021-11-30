@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.ArrayRes;
 
@@ -176,7 +177,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         long c = -1;
         ArrayList<StudentInfo> info = result;
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("StudentDetails", null, null);
+        //db.delete("StudentDetails", null, null);
         ContentValues values = new ContentValues();
 
         if (info != null) {
@@ -199,11 +200,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     values.put("Attendance", info.get(i).getAttendance());
 
                     c = db.insert("StudentDetails", null, values);
-
+//                    c = db.insertOrThrow("StudentDetails", null, values);
                     if (c > 0) {
                         Log.d("Data", "Inserted");
+                        Toast.makeText(myContext.getApplicationContext(), "Data Inserted", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.d("Data", "Not Inserted");
+                        Toast.makeText(myContext.getApplicationContext(), "Data Not Inserted", Toast.LENGTH_SHORT).show();
                     }
                 }
 
