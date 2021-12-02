@@ -242,8 +242,6 @@ public class MainActivity extends AppCompatActivity {
                         });
 
                         ab.show();
-
-
                     }
 
                 } else {

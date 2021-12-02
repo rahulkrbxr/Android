@@ -2,6 +2,7 @@ package com.example.rahulmedhasoft;
 
 import android.app.Activity;
 import android.content.Context;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,11 @@ public class DetailsAdaptor extends BaseAdapter {
         mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         view = mInflater.inflate(R.layout.list_row_adaptor, null);
         holder = new ViewHolder();
+        holder.beneficieryID = view.findViewById(R.id.beneficieryID);
         holder.studentName = view.findViewById(R.id.studentName);
         holder.fatherName = view.findViewById(R.id.fatherName);
         holder.motherName = view.findViewById(R.id.motherName);
+        holder.attendance = view.findViewById(R.id.attendance);
 
         holder.radioattn = view.findViewById(R.id.radioattn);
         holder.radio_Y_attn = view.findViewById(R.id.radio_yes);
@@ -77,15 +80,16 @@ public class DetailsAdaptor extends BaseAdapter {
 
         view.setTag(holder);
 
-        holder.radioattn.setFocusable(false);
-        holder.radio_Y_attn.setFocusable(false);
-        holder.radio_N_attn.setFocusable(false);
 
         countChecked = 0;
         int pos = i+1;
 
         if (data != null) {
             StudentInfo country = data.get(i);
+            String beneficieryID = country.getBeneficieryId();
+            if (beneficieryID != null) {
+                holder.beneficieryID.setText("BeneficieryID: " + beneficieryID);
+            }
             String studentName = country.getBeneficieryName();
             if (studentName != null) {
                 holder.studentName.setText("Name: " + studentName);
@@ -98,14 +102,27 @@ public class DetailsAdaptor extends BaseAdapter {
             if (motherName != null) {
                 holder.motherName.setText("MName: " + motherName);
             }
+            String attendance = country.getAttendance();
+            if (attendance != null) {
+                holder.attendance.setText("Attendance: " + attendance);
+            }
+            if (attendance.equals("N")) {
+                holder.radio_N_attn.setChecked(true);
+            } else if (attendance.equals("Y")) {
+                holder.radio_Y_attn.setChecked(true);
+            } else {
+                holder.radio_Y_attn.setChecked(false);
+                holder.radio_N_attn.setChecked(false);
+            }
         }
+
         notifyDataSetChanged();
         return view;
     }
 
     private class ViewHolder
     {
-        TextView studentName, fatherName, motherName;
+        TextView studentName, fatherName, motherName, beneficieryID, attendance;
         LinearLayout list_row_detail;
         RadioGroup radioattn;
         RadioButton radio_Y_attn, radio_N_attn;

@@ -250,7 +250,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            String SQLQ = "SELECT BeneficieryName, FHName, MName FROM StudentDetails";
+            String SQLQ = "SELECT BeneficieryId, BeneficieryName, FHName, MName, Attendance FROM StudentDetails";
 
             cursor = sqLiteDatabase.rawQuery(SQLQ, null);
 
@@ -258,9 +258,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
             while (cursor.moveToNext()) {
                 StudentInfo student = new StudentInfo();
+                student.setBeneficieryId((cursor.getString(cursor.getColumnIndex("BeneficieryId"))));
                 student.setBeneficieryName((cursor.getString(cursor.getColumnIndex("BeneficieryName"))));
                 student.setFHName(cursor.getString(cursor.getColumnIndex("FHName")));
                 student.setMName(cursor.getString(cursor.getColumnIndex("MName")));
+                student.setAttendance((cursor.getString(cursor.getColumnIndex("Attendance"))));
 
                 /**
                  * add more details

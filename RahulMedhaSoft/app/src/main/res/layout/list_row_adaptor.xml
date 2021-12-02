@@ -23,8 +23,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.8"
-
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/beneficieryID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Beneficiery ID"
+                    android:textColor="#A020F0"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/studentName"
@@ -56,6 +65,15 @@
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/attendance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Attendance"
+                    android:textColor="#A020F0"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
