@@ -1,6 +1,7 @@
 package com.example.rahulmedhasoft.database;
 
 
+import com.example.rahulmedhasoft.entity.MDMStudentInfo;
 import com.example.rahulmedhasoft.entity.StudentInfo;
 
 import org.ksoap2.SoapEnvelope;
@@ -13,16 +14,17 @@ import java.util.ArrayList;
 public class WebServiceHelper {
 
 
-//  public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
-    public static final String SERVICENAMESPACE = "http://10.133.20.135:80/";
-//public static final String SERVICENAMESPACE = "http://192.168.1.2:80/";
+    //  public static final String SERVICENAMESPACE = "http://schoolwebservice:8080/";
+//    public static final String SERVICENAMESPACE = "http://10.133.20.135:80/";
+    public static final String SERVICENAMESPACE = "http://192.168.1.2:80/";
     //public static final String SERVICENAMESPACE = "http://192.168.43.191:4545/";
-    public static final String SERVICEURL = "http://10.133.20.135:80/WebServiceAPI.asmx";
-//    public static final String SERVICEURL = "http://192.168.1.2:80/WebServiceAPI.asmx";
+//    public static final String SERVICEURL = "http://10.133.20.135:80/WebServiceAPI.asmx";
+        public static final String SERVICEURL = "http://192.168.1.2:80/WebServiceAPI.asmx";
     //public static final String SERVICEURL = "http://192.168.43.191:4545/WebServiceAPI.asmx";
     //    public static final String SERVICEURL = "http://10.133.20.135:8081/WebServiceAPI.asmx";
     public static final String AuthenticateMethod = "Authenticate";
     public static final String GetStudentList = "Student_Details";
+    public static final String GetMDMStudentList = "GetMDMStudentList";
 
     // public static final String SERVICENAMESPACE = "http://10.133.20.159/";
     // public static final String SERVICEURL = "http://localhost:58639/WebServiceAPI.asmx";
@@ -39,8 +41,7 @@ public class WebServiceHelper {
 //    }
 
 
-    public static String AuthenticatMethod(String diceCode,String mobno,String otp)
-    {
+    public static String AuthenticatMethod(String diceCode, String mobno, String otp) {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, AuthenticateMethod);
 
@@ -57,12 +58,11 @@ public class WebServiceHelper {
 
             HttpTransportSE androidHttpTransport = new HttpTransportSE(
                     SERVICEURL);
-            androidHttpTransport.call(SERVICENAMESPACE + AuthenticateMethod,envelope);
+            androidHttpTransport.call(SERVICENAMESPACE + AuthenticateMethod, envelope);
             // res2 = (SoapObject) envelope.getResponse();
             rest = envelope.getResponse().toString();
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -96,7 +96,7 @@ public class WebServiceHelper {
         }
         int TotalProperty = res1.getPropertyCount();
         ArrayList<StudentInfo> pvmArrayList = new ArrayList<StudentInfo>();
-        if(TotalProperty>0) {
+        if (TotalProperty > 0) {
 
 
             for (int ii = 0; ii < TotalProperty; ii++) {
@@ -105,6 +105,49 @@ public class WebServiceHelper {
                     if (property instanceof SoapObject) {
                         SoapObject final_object = (SoapObject) property;
                         StudentInfo state = new StudentInfo(final_object);
+                        pvmArrayList.add(state);
+                    }
+                } else
+                    return pvmArrayList;
+            }
+        }
+        return pvmArrayList;
+    }
+
+    public static ArrayList<MDMStudentInfo> GetMDMStudentList(String disecode) {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GetMDMStudentList);
+
+        request.addProperty("disecode", disecode);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, MDMStudentInfo.getdata.getSimpleName(), MDMStudentInfo.getdata);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GetMDMStudentList, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+        ArrayList<MDMStudentInfo> pvmArrayList = new ArrayList<MDMStudentInfo>();
+        if (TotalProperty > 0) {
+
+
+            for (int ii = 0; ii < TotalProperty; ii++) {
+                if (res1.getProperty(ii) != null) {
+                    Object property = res1.getProperty(ii);
+                    if (property instanceof SoapObject) {
+                        SoapObject final_object = (SoapObject) property;
+                        MDMStudentInfo state = new MDMStudentInfo(final_object);
                         pvmArrayList.add(state);
                     }
                 } else

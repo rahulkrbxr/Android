@@ -29,7 +29,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "LOCDB.db";
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -52,16 +51,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      *
      * @param context
      */
-    public DataBaseHelper(Context context) {
-        super(context, DB_NAME, null, 3);
-        Log.e("DataBaseHelper", "1");
-        if (Build.VERSION.SDK_INT >= 4.2) {
-            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        } else {
-            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        }
-        this.myContext = context;
-    }
+
 
     /**
      * Creates a empty database on the system and rewrites it with your own

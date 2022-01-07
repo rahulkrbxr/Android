@@ -43,7 +43,10 @@ public class AttendanceListActivity extends AppCompatActivity {
     }
 
     public void searchStdList() {
-        DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
+
+//        DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
+        DataBaseHelper helper = new DataBaseHelper();
+
         studentList = helper.getStudentDetails();
 
 //        studentArrayList = studentList;

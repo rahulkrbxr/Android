@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.rahulmedhasoft.database.DataBaseHelper;
 import com.example.rahulmedhasoft.database.WebServiceHelper;
+import com.example.rahulmedhasoft.entity.MDMStudentInfo;
 import com.example.rahulmedhasoft.entity.StudentInfo;
 import com.example.rahulmedhasoft.entity.UserDetails;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout lin_home;
     LinearLayout lin_studentdetails;
     LinearLayout lin_viewstudentdetails;
+
     TextView diseCode;
     TextView mobileNo;
     TextView otp;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private String userDiseCode="";
     private String userMobileNumber="";
     private String userOtp="";
+
+    LinearLayout lin_mid_day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,22 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-//         success in retrieving data from login.java
-//        Intent intent = getIntent();
-//        userDiseCode = intent.getStringExtra("UserDiseCode");
-//        userMobileNumber = intent.getStringExtra("UserMobileNumber");
-//        userOtp = intent.getStringExtra("UserOtp");
-//        finish();
-//        Toast.makeText(getApplicationContext(), userDiseCode + "\n" + userMobileNumber + "\n" + userOtp, Toast.LENGTH_SHORT).show();
-
-//        UserDetails ud = new UserDetails();
-//        Toast.makeText(getApplicationContext(), ud.getDiseCode()+'\n'+ud.getMobileNo(), Toast.LENGTH_SHORT).show();
-
         SharedPreferences sharedPreferences = getSharedPreferences("userLoginDetails", 0);
 
         userDiseCode = sharedPreferences.getString("UserDiseCode", "");
         diseCode = findViewById(R.id.user_dise);
         diseCode.setText("Dise Code: " + userDiseCode);
+
 
         userMobileNumber = sharedPreferences.getString("UserMobileNumber", "");
         mobileNo = findViewById(R.id.total_students_mid_day_meal);
@@ -143,8 +137,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        lin_mid_day = findViewById(R.id.lin_mid_day);
+        lin_mid_day.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+    }
 
     private class StudentList extends AsyncTask<String, Void, ArrayList<StudentInfo>> {
 
@@ -176,6 +177,129 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(ArrayList<StudentInfo> result) {
+            super.onPostExecute(result);
+
+//            Intent intent = new Intent(MainActivity.this, StudentDetails.class);
+//            startActivity(intent);
+            if (result != null) {
+                if (result.size() > 0) {
+
+                    Log.d("result.size", "" + result.size());
+                    final String totalres = "" + result.size();
+                    Toast.makeText(getApplicationContext(), totalres, Toast.LENGTH_SHORT).show();
+//                    DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
+                    DataBaseHelper helper = new DataBaseHelper();
+
+                    long i = helper.setStudentDetails(result);
+
+                    if (i > 0) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+                        ab.setCancelable(false);
+                        ab.setIcon(R.drawable.download);
+
+                        ab.setTitle("DOWNLOAD SUCCESS");
+                        ab.setMessage(result.size() + " Student Details Downloaded Successfully.");
+                        Dialog dialog = new Dialog(MainActivity.this);
+                        dialog.setCanceledOnTouchOutside(false);
+                        ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                    txtTStd.setText(totalres);
+//                                    txtTotalStudents.setText("Total Student : " + totalres);
+
+//                                resetValueS();
+                                dialog.dismiss();
+//                                Intent intent = new Intent(MainActivity.this, DetailsAdaptor.class);
+//
+//                                startActivity(intent);
+
+                            }
+                        });
+
+                        ab.show();
+
+
+                    } else {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
+                        AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+                        ab.setCancelable(false);
+                        ab.setIcon(R.drawable.download);
+
+                        ab.setTitle("DOWNLOAD FAIL");
+                        ab.setMessage(" No Student Details Downloaded for DISE CODE: " + diseCode);
+                        Dialog dialog = new Dialog(MainActivity.this);
+                        dialog.setCanceledOnTouchOutside(false);
+                        ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+
+                                dialog.cancel();
+
+                            }
+                        });
+
+                        ab.show();
+                    }
+
+                } else {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                    AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+                    ab.setCancelable(false);
+                    ab.setIcon(R.drawable.download);
+
+                    ab.setTitle("DOWNLOAD FAIL");
+                    ab.setMessage(" No Student Details Downloaded for DISE CODE: " + diseCode);
+                    Dialog dialog = new Dialog(MainActivity.this);
+                    dialog.setCanceledOnTouchOutside(false);
+                    ab.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ab.show();
+                }
+            } else {
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+                Toast.makeText(getApplicationContext(), "Response NULL.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class MidDayMealList extends AsyncTask<String, Void, ArrayList<MDMStudentInfo>> {
+
+        private ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            try {
+                if (dialog == null) {
+                    dialog = new ProgressDialog(MainActivity.this);
+                }
+                dialog.setMessage("Fetching results.\nPlease wait...");
+                dialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected ArrayList<MDMStudentInfo> doInBackground(String... strings) {
+            return WebServiceHelper.GetMDMStudentList("10130507504");
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<MDMStudentInfo> result) {
             super.onPostExecute(result);
 
 //            Intent intent = new Intent(MainActivity.this, StudentDetails.class);
@@ -273,30 +397,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    public void resetValueS() {
-//        DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
-//        countstd = helper.getStudentCountForUploading();
-//        countattstd = helper.getStudentCountForAttendanceUploading();
-//        countnew = helper.getStudentCountNew();
-//        countMatched = helper.getStudentCountForMatchedByBank();
-//        countNotMatchedBank = helper.getStudentCountForNotMatchedByBank();
-//        countRejected = helper.getRejectedStudentCount();
-//        countPFMS = helper.getStudentCountPFMSPending();
-////        txtCount3.setText(String.valueOf(countattstd));
-////        txtCount4.setText(String.valueOf(countattstd));
-//        tv_newCount.setText(String.valueOf(countnew));
-//        tv_Count2.setText(String.valueOf(countMatched));
-//        tv_Count3.setText(String.valueOf(countPFMS));
-//        tv_Count4.setText(String.valueOf(countNotMatchedBank));
-//        tv_Count5.setText(String.valueOf(countRejected));
-//
-//        //long totalstd=helper.getTOTALStudentCount(_diseCode);
-//        long totalstd = helper.getTOTALStudentCount();
-//        long totalstdMDM = helper.getTOTALStudentCountMDM();
-//
-//        total_stud.setText("Total Student : " + totalstd);
-//        total_stud_mid_day_meal.setText("Total Student(MID Day Meal) : " + totalstdMDM);
-//
-//        // txtTStd.setText(""+totalstd);
-//    }
 }
